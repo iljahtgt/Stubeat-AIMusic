@@ -4,7 +4,7 @@ var bodyParser = require('body-parser')
 var routes = require('./routes/index.js');
 require('dotenv').config();
 
-var port = process.env.PORT;
+var port = process.env.PORT || 3000;
 
 var app = express();
 
