@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <%- include('../../partials/header') -%>
+        <%- include('../../partials/styles') -%>
+<style>
+    h1{
+        text-align: center;
+        font-family:'Lobster', cursive;
+        font-size: 4vw;
+    }
+</style>
+  </head>
+  <body>
+    <%- include('../../partials/navbar.ejs') -%>
+
+<h1>Music Editor</h1>
+<div class="left" id="sampleList">
+
+</div>
+<div class="right"></div>
+    <%- include('../../partials/scripts') -%>
+  </body>
+  <script>
+      $(document).ready(function(){
+          $.ajax({
+              type: "get",
+              url: process.env.SAMPLE_LIST_URL,
+          })
+          .done()
+          .fail()
+      })
+  </script>
+</html>

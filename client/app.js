@@ -2,6 +2,8 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser')
 var routes = require('./routes/index.js');
+var music = require('./routes/music.js');
+var account = require('./routes/account.js');
 require('dotenv').config();
 
 var port = process.env.PORT || 3000;
@@ -18,7 +20,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 // routing
-app.use('/', routes)
+app.use('/', routes);
+app.use('/music', music);
+app.use('/account', account);
 
 app.listen(port);
 console.log(`Listening on port ${port}`);

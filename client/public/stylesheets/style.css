@@ -51,3 +51,19 @@
   font-size: 1vw;
   font-family: 'Courgette', cursive;
 }
+
+.left{
+  position: absolute;
+  left: auto;
+  width: 20vw;
+  height: 80vh;
+  border: 3px solid black;
+}
+
+.right{
+  position: absolute;
+  left: 20vw;
+  width: 80vw;
+  height: 80vh;
+  border: 3px solid green;
+}
