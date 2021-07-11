@@ -55,15 +55,15 @@
 .left{
   position: absolute;
   left: auto;
-  width: 20vw;
+  width: 15vw;
   height: 80vh;
   border: 3px solid black;
 }
 
 .right{
   position: absolute;
-  left: 20vw;
-  width: 80vw;
+  left: 15vw;
+  width: 85vw;
   height: 80vh;
   border: 3px solid green;
 }

@@ -1,16 +1,39 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
 
     <%- include('../../partials/header') -%>
         <%- include('../../partials/styles') -%>
+            <style>
+                h1 {
+                    text-align: center;
+                    font-family: 'Lobster', cursive;
+                    font-size: 4vw;
+                }
 
-  </head>
-  <body>
+                .card {
+                    width: 50%;
+                    margin: 20px auto;
+                }
+            </style>
+</head>
+
+<body>
     <%- include('../../partials/navbar.ejs') -%>
-<h1>Login</h1>
+        <h1>Login</h1>
+
+        <div class="card social-block">
+            <div class="card-body">
+                <a class="btn btn-block btn-social btn-google" href="/google" role="button">
+                    <i class="fa fa-google"></i>
+                    Sign up with google
+                </a>
+            </div>
+        </div>
 
 
-    <%- include('../../partials/scripts') -%>
-  </body>
+        <%- include('../../partials/scripts') -%>
+</body>
+
 </html>

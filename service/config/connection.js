@@ -1,11 +1,11 @@
 var mysql = require('mysql');
 
 var con = mysql.createConnection({
-    host: "127.0.0.1",
+    host: "localhost",
     user: "root",
-    password: "2iuigigi",
-    database: "report",
-    charset: 'utf8mb4'
+    password: "chris17",
+    port: 3306,
+    database: "userinfo",
 });
 
 module.exports = con;
