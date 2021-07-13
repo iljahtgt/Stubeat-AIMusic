@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <%- include('../../partials/header') -%> <%-
+    include('../../partials/styles') -%>
+
+  </head>
+
+  <body>
+    <%- include('../../partials/navbar.ejs') -%> <%-
+    include('../../partials/scripts') -%>
+    <div class="main">
+      <h1
+        class="fontCaveat"
+        style="font-size: 46px; text-align: center; margin-top: 10px"
+      >
+        Member Information
+      </h1>
+      <div class="memberCard">
+        <div class="info">
+          <label class="mamberInfoTitle">Member ID#: </label
+          ><span id="memberid" class="mamberPageInfo"></span>
+        </div>
+        <div class="info">
+          <label class="mamberInfoTitle">Name: </label
+          ><span id="name" class="mamberPageInfo"></span>
+        </div>
+        <div class="info">
+          <label class="mamberInfoTitle">Email: </label
+          ><span id="email" class="mamberPageInfo"></span>
+        </div>
+      </div>
+
+    </div>
+   
+    <script>
+      var id = localStorage['id'];
+      var username = localStorage['username'];
+
+      $('#memberid').html(id);
+      $('#name').html(username);
+    </script>
+
+  </body>
+</html>

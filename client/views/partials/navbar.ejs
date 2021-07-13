@@ -18,11 +18,17 @@
 
         <ul class="nav navbar-nav navbar-right">
             <!-- <li><a href="/" style="color: white" class="aHover">Home</a></li> -->
-            <li><a href="/account/member" style="color: white; display: none" class="aHover" id="member"></a></li>
+            <!-- <li><a href="/account/member" style="color: white; display: none" class="aHover" id="member"></a></li> -->
             <li><a href="/about" style="color: white" class="aHover">About</a></li>
             <li><a href="/purchase/shop" style="color: white" class="aHover">Contact Us</a></li>
+            <!-- <li><a href="/account/login" style="color: white" class="aHover" id="login">Login</a></li> -->
+            <!-- <li><a style="color: white; display: none; cursor: pointer;" class="aHover" id="logout">Logout</a></li> -->
+            <% if(loginStatus) { %>
+                <li style="margin-top:14px ;"> <%= user.username %><%= user.First_Name%></li>
+                <li><a href="/logout" style="color: white; cursor: pointer;" class="aHover" id="logout">Logout</a></li>
+                <% }else{ %>
             <li><a href="/account/login" style="color: white" class="aHover" id="login">Login</a></li>
-            <li><a style="color: white; display: none; cursor: pointer;" class="aHover" id="logout">Logout</a></li>
+            <% } %>
             <!-- <li><a href="/purchase/cart" class="glyphicon glyphicon-shopping-cart aHover"
                     style="color: white; font-size: 18px;"><span id="badge" class="badge"></span></a></li> -->
             <!-- <li class="dropdown">
@@ -35,4 +41,8 @@
         </ul>
 
     </div><!-- /.navbar-collapse -->
+
+
+
 </nav>
+

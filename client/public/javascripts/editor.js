@@ -68,7 +68,7 @@ function noteOn() {
     var flag = false;
 
     if (testset.notes.length != 0) {
-        var index = $(this).parent().attr('id');
+        var index = $(this).parent().index(); 
         var pitch = drumSet[$(this).index()];
         for (note of testset.notes) {
             if (note.quantizedStartStep == index && note.pitch == pitch) {
@@ -135,4 +135,11 @@ function transferNotes(x) {
 
 
 }
+
+$('#sampleBefore').click(()=>{
+    var reader = new FileReader('/samples/Sample_before.mid');
+    var m = mm.midiToSequenceProto(reader.result);
+    console.log(m);
+    var player = new mm.SoundFontPlayer('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus');
+});
 

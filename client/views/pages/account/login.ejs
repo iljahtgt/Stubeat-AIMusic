@@ -12,9 +12,25 @@
                     font-size: 4vw;
                 }
 
-                .card {
-                    width: 50%;
+                .form-group {
+                    width: 30%;
                     margin: 20px auto;
+                }
+
+                .card {
+                    width: 30%;
+                    height: 50px;
+                    margin: 10px auto;
+                }
+
+                .btns {
+                    width: 50%;
+                    margin: 10px auto;
+                    text-align: center;
+                }
+
+                input#addusername, input#addpassword{
+                    width: 100%;
                 }
             </style>
 </head>
@@ -23,17 +39,146 @@
     <%- include('../../partials/navbar.ejs') -%>
         <h1>Login</h1>
 
+        <form action="/account/login" method="POST">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" class="form-control" name="username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="text" id="password" class="form-control" name="password">
+            </div>
+            <div class="btns">
+                <button class="btn btn-primary" id="loginBtn">登入</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addMem">註冊</button>
+            </div>
+
+        </form>
+
         <div class="card social-block">
             <div class="card-body">
-                <a class="btn btn-block btn-social btn-google" href="/google" role="button">
+                <a class="btn btn-block btn-social btn-google" id="googlelogin" href="/google" role="button">
                     <i class="fa fa-google"></i>
                     Sign up with google
                 </a>
             </div>
         </div>
 
+        <div class="card social-block">
+            <div class="card-body">
+                <a class="btn btn-block btn-social btn-facebook" href="/auth/facebook" role="button">
+                    <i class="fa fa-facebook"></i>
+                    Sign up with facebook
+                </a>
+            </div>
+        </div>
+        </div>
+        <!-- addMem -->
+        <div class="modal fade" id="addMem" data-backdrop="static" data-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">註冊會員</h3>
+                    </div>
+                    <div class="modal-body">
+                        <!-- form -->
+                        <form action="/account/signup" method="POST" class="modalFormBorder">
+                            <div class="container">
+                                <div class="form-group">
+                                    <label for="addusername">使用者名稱：</label>
+                                    <input id="addusername" name="username" type="text" class="form-control" required>
+                                </div>
+                                <% if(message.length>0) { %>
+                                    <div calss="alert alert-danger">
+                                        <%= message %>
+                                    </div>
+                                    <% } %>
+                                        <div class="form-group">
+                                            <label for="addpassword">使用者密碼：</label>
+                                            <input id="addpassword" name="password" type="password" class="form-control"
+                                                required>
+                                        </div>
+                                        <div class="form-group">
+                                            <button class="btn btn-primary" id="signupBtn" type="submit">註冊</button>
+                                            <button type="reset" class="btn btn-success">Reset</button>
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">關閉</button>
+                                        </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
 
         <%- include('../../partials/scripts') -%>
+
+            <!-- <script>
+                        // Log in
+                        $('#loginBtn').click(function () {
+                            var username = $("#username").val();
+                            var password = $("#password").val();
+                            var info = {
+                                username: username,
+                                password: password
+                            };
+
+                            $.ajax({
+                                type: 'post',
+                                url: 'http://localhost:1337/api/login',
+                                data: JSON.stringify(info),
+                                contentType: "application/json;charset=utf-8",
+                            }).done(result => {
+                                console.log(result);
+                                if (result.id === undefined) {
+                                    alert('Something is wrong, try again...');
+                                    window.location.href = '/account/login';
+                                } else {
+                                    localStorage.setItem('loginStatus', true);
+                                    localStorage.setItem('id', result.id);
+                                    localStorage.setItem('username', result.username);
+                                    window.location.href = '/';
+                                }
+
+
+                            }
+                            ).fail(() => {
+                                alert('Something is wrong...');
+                                window.location.href = '/account/login';
+                            });
+                        })
+
+                        // Sign up
+                        $('#signupBtn').click(function () {
+                            var username = $("#username").val();
+                            var password = $("#password").val();
+                            var info = {
+                                username: username,
+                                password: password
+                            };
+
+                            $.ajax({
+                                type: 'post',
+                                url: 'http://localhost:1337/api/signup',
+                                data: JSON.stringify(info),
+                                contentType: "application/json;charset=utf-8",
+                            }).done(result => {
+                                console.log(result);
+                                alert('Welcome to StuBeat!');
+                                window.location.href = '/account/login';
+                            }
+
+                            ).fail(() => {
+                                alert('Something is wrong...');
+                                window.location.href = '/account/login';
+                            })
+                        });
+
+                    </script> -->
 </body>
 
 </html>

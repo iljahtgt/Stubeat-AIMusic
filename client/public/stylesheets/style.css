@@ -56,7 +56,7 @@
   position: absolute;
   left: auto;
   width: 15vw;
-  height: 80vh;
+  height: 800px;
   border: 3px solid black;
 }
 
@@ -64,6 +64,72 @@
   position: absolute;
   left: 15vw;
   width: 85vw;
-  height: 80vh;
+  height: 800px;
   border: 3px solid green;
+}
+
+.memberCard {
+  /* height: 300px; */
+  width: 50%;
+  margin: 20px auto;
+  text-align: left;
+  padding: 20px;
+  border: 2px ridge white;
+  border-radius: 15px;
+}
+
+.info {
+  font-size: 20px;
+  margin: 30px auto;
+  width: 400px;
+  font-family: 'Courgette', cursive;
+}
+
+.mamberPageInfo {
+  padding-left: 10px;
+  font-size: 20px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+#addMem{
+  width: 25%;
+  height: 70%;
+  margin-left:37%;
+  margin-top:5%;
+  background-color: whitesmoke;
+  border: 5px solid rgb(46,78,111);
+  border-radius: 5px;
+  /* padding: 5px; */
+  text-align: center;
+}
+
+
+#addusername,#addpassword{
+  width: 60%;
+}
+
+
+div.modal-dialog,div.modal-content{
+  width: 100%;
+  height: 100%;
+  margin:0;
+}
+
+div button{
+  margin-top: 20px;
+}
+div.modal-footer{
+  /* height:50px; */
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+}
+div.modal-header{
+  height: 60px;
+  align-items: center;
+  background-color: rgb(250,216,73);
+}
+
+div.container{
+  width: 100%;
 }

@@ -5,8 +5,7 @@
 
     <%- include('../../partials/header') -%>
         <%- include('../../partials/styles') -%>
-            <script src="https://cdn.jsdelivr.net/npm/@magenta/music@^1.0.0"></script>
-            <script src="https://cdn.jsdelivr.net/npm/d3@5.7.0/dist/d3.min.js"></script>
+            
             <style>
                 h1 {
                     text-align: center;
@@ -47,6 +46,11 @@
                     padding: 10px;
                     text-align: right;
                 }
+
+                .samples button{
+                        width: 90%;
+                        margin: 10px 10px;
+                }
             </style>
 </head>
 
@@ -56,140 +60,144 @@
 
         <h1>Music Editor</h1>
         <div class="left" id="sampleList">
+                <div class="samples">
+                        <button id="sampleBefore" class="btn btn-default">Sample (Before)</button>
+                        <button id="sampleAfter" class="btn btn-default">Sample (After)</button>
+                </div>
 
         </div>
         <div class="right">
 
             <div id="editTable">
                 <div id="btnGroup">
-                    <div id="0" class="timeSeri"><button class="soundBtn"></button><button
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button></div>
-                    <div id="1" class="timeSeri"><button class="soundBtn"></button><button
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button></div>
-                    <div id="2" class="timeSeri"><button class="soundBtn"></button><button
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button></div>
-                    <div id="3" class="timeSeri"><button class="soundBtn"></button><button
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button></div>
-                    <div id="4" class="timeSeri"><button class="soundBtn"></button><button
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button></div>
-                    <div id="5" class="timeSeri"><button class="soundBtn"></button><button
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button></div>
-                    <div id="6" class="timeSeri"><button class="soundBtn"></button><button
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button></div>
-                    <div id="7"class="timeSeri"><button class="soundBtn"></button><button class="soundBtn"></button><button
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
-                            class="soundBtn"></button></div>
-                    <div id="8" class="timeSeri"><button class="soundBtn"></button><button class="soundBtn"></button><button
+                            class="soundBtn"></button><button class="soundBtn"></button></div>
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
-                            class="soundBtn"></button></div>
-                    <div id="9" class="timeSeri"><button class="soundBtn"></button><button class="soundBtn"></button><button
+                            class="soundBtn"></button><button class="soundBtn"></button></div>
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
-                            class="soundBtn"></button></div>
-                    <div id="10" class="timeSeri"><button class="soundBtn"></button><button class="soundBtn"></button><button
+                            class="soundBtn"></button><button class="soundBtn"></button></div>
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
-                            class="soundBtn"></button></div>
-                    <div id="11" class="timeSeri"><button class="soundBtn"></button><button class="soundBtn"></button><button
+                            class="soundBtn"></button><button class="soundBtn"></button></div>
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
-                            class="soundBtn"></button></div>
-                    <div id="12" class="timeSeri"><button class="soundBtn"></button><button class="soundBtn"></button><button
+                            class="soundBtn"></button><button class="soundBtn"></button></div>
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
-                            class="soundBtn"></button></div>
-                    <div id="13" class="timeSeri"><button class="soundBtn"></button><button class="soundBtn"></button><button
+                            class="soundBtn"></button><button class="soundBtn"></button></div>
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
-                            class="soundBtn"></button></div>
-                    <div id="14" class="timeSeri"><button class="soundBtn"></button><button class="soundBtn"></button><button
+                            class="soundBtn"></button><button class="soundBtn"></button></div>
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
-                            class="soundBtn"></button></div>
-                    <div id="15" class="timeSeri"><button class="soundBtn"></button><button class="soundBtn"></button><button
+                            class="soundBtn"></button><button class="soundBtn"></button></div>
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
-                            class="soundBtn"></button></div>
-                    <div id="16" class="timeSeri"><button class="soundBtn"></button><button class="soundBtn"></button><button
+                            class="soundBtn"></button><button class="soundBtn"></button></div>
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
-                            class="soundBtn"></button></div>
-                    <div id="17" class="timeSeri"><button class="soundBtn"></button><button class="soundBtn"></button><button
+                            class="soundBtn"></button><button class="soundBtn"></button></div>
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
-                            class="soundBtn"></button></div>
-                    <div id="18" class="timeSeri"><button class="soundBtn"></button><button class="soundBtn"></button><button
+                            class="soundBtn"></button><button class="soundBtn"></button></div>
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
-                            class="soundBtn"></button></div>
-                    <div id="19" class="timeSeri"><button class="soundBtn"></button><button class="soundBtn"></button><button
+                            class="soundBtn"></button><button class="soundBtn"></button></div>
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
-                            class="soundBtn"></button></div>
-                    <div id="20" class="timeSeri"><button class="soundBtn"></button><button class="soundBtn"></button><button
+                            class="soundBtn"></button><button class="soundBtn"></button></div>
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
-                            class="soundBtn"></button></div>
-                    <div id="21" class="timeSeri"><button class="soundBtn"></button><button class="soundBtn"></button><button
+                            class="soundBtn"></button><button class="soundBtn"></button></div>
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
-                            class="soundBtn"></button></div>
-                    <div id="22" class="timeSeri"><button class="soundBtn"></button><button class="soundBtn"></button><button
+                            class="soundBtn"></button><button class="soundBtn"></button></div>
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
-                            class="soundBtn"></button></div>
-                    <div id="23"class="timeSeri"><button class="soundBtn"></button><button class="soundBtn"></button><button
+                            class="soundBtn"></button><button class="soundBtn"></button></div>
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
-                            class="soundBtn"></button></div>
-                    <div id="24" class="timeSeri"><button class="soundBtn"></button><button class="soundBtn"></button><button
+                            class="soundBtn"></button><button class="soundBtn"></button></div>
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
-                            class="soundBtn"></button></div>
-                    <div id="25" class="timeSeri"><button class="soundBtn"></button><button class="soundBtn"></button><button
+                            class="soundBtn"></button><button class="soundBtn"></button></div>
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
-                            class="soundBtn"></button></div>
-                    <div id="26" class="timeSeri"><button class="soundBtn"></button><button class="soundBtn"></button><button
+                            class="soundBtn"></button><button class="soundBtn"></button></div>
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
-                            class="soundBtn"></button></div>
-                    <div id="27" class="timeSeri"><button class="soundBtn"></button><button class="soundBtn"></button><button
+                            class="soundBtn"></button><button class="soundBtn"></button></div>
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
-                            class="soundBtn"></button></div>
-                    <div id="28" class="timeSeri"><button class="soundBtn"></button><button class="soundBtn"></button><button
+                            class="soundBtn"></button><button class="soundBtn"></button></div>
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
-                            class="soundBtn"></button></div>
-                    <div id="29" class="timeSeri"><button class="soundBtn"></button><button class="soundBtn"></button><button
+                            class="soundBtn"></button><button class="soundBtn"></button></div>
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
-                            class="soundBtn"></button></div>
-                    <div id="30" class="timeSeri"><button class="soundBtn"></button><button class="soundBtn"></button><button
+                            class="soundBtn"></button><button class="soundBtn"></button></div>
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
-                            class="soundBtn"></button></div>
-                    <div id="31" class="timeSeri"><button class="soundBtn"></button><button class="soundBtn"></button><button
+                            class="soundBtn"></button><button class="soundBtn"></button></div>
+                    <div class="timeSeri"><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
-                            class="soundBtn"></button></div>
+                            class="soundBtn"></button><button class="soundBtn"></button></div>
                 </div>
             </div>
 
