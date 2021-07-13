@@ -23,5 +23,11 @@ router.get('/', function(req, res, next) {
   
 });
 
+router.get('/about', function(req, res, next) {
+  checkloginStatus(req,res);
+  res.render('pages/main/about',{user:req.user,loginStatus:islogin});
+  
+});
+
 
 module.exports = router;
