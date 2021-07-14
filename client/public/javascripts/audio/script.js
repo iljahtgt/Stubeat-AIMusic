@@ -368,6 +368,9 @@ function playRecording() {
 function playRNN() {
 
   recorder.musicRNN()
+  document.getElementById('btnReplayRNN').querySelector('.text').textContent = 'stop';
+  document.getElementById('btnReplayRNN').querySelector('.stop').removeAttribute('hidden');
+  document.getElementById('btnReplayRNN').querySelector('.play').setAttribute('hidden', true);
   // document.getElementById('btnRNN').disabled = true;
 }
 function replayRNN() {
@@ -418,6 +421,11 @@ async function drumifyOnServer(ns) {
 
 // 當按下record或stop時，重設以下功能
 function resetInputRelatedThings() {
+
+  if (rnnPlayer.isPlaying()) {
+    rnnPlayer.stop();
+  }
+  
   audioLoop.reset();
   recorder.reset();
   visualizer.reset();

@@ -46,7 +46,7 @@
   font-size: 10vw;
 }
 
-.btn_centered{
+/* .btn_centered{
   position: absolute;
   top: 90%;
   left: 50%;
@@ -55,6 +55,21 @@
 .btn_try{
   font-size: 1vw;
   font-family: 'Courgette', cursive;
+} */
+
+.indexBtn{
+  margin-top: 20px;
+}
+
+.indexBtn a{
+  margin-right: 20px;
+  font-size: 1.2vw;
+  /* font-family: 'Courgette', cursive */
+}
+
+.indexBtn a.btn{
+  width: 10%;
+  height: 10%;
 }
 
 /* member page */

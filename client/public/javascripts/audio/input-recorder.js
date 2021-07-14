@@ -159,20 +159,22 @@ class InputRecorder {
   playRNN() {
 
     if (rnnPlayer.isPlaying()) {
+
       rnnPlayer.stop();
+
+      document.getElementById('btnReplayRNN').querySelector('.text').textContent = 'replay';
+      document.getElementById('btnReplayRNN').querySelector('.play').removeAttribute('hidden');
+      document.getElementById('btnReplayRNN').querySelector('.stop').setAttribute('hidden', true);
+
       return;
     }
 
+    document.getElementById('btnReplayRNN').querySelector('.text').textContent = 'stop';
+    document.getElementById('btnReplayRNN').querySelector('.stop').removeAttribute('hidden');
+    document.getElementById('btnReplayRNN').querySelector('.play').setAttribute('hidden', true);
+
 
     console.log(trainedSet)
-    var sets = trainedSet.notes
-    // console.log(sets.length)
-    Array.prototype.forEach.call(sets, i => { transferNotes(i) })
-    // sets.foreach(i => console.log(i));
-    // console.log(trainedSet)
-    trainedSet.quantizationInfo = trainedSet.quantizationInfo
-    trainedSet.tempos = trainedSet.tempos
-    trainedSet.totalQuantizedSteps = trainedSet.totalQuantizedSteps
     rnnPlayer.start(trainedSet)
 
     function transferNotes(x) {
