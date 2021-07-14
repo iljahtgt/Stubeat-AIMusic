@@ -29,16 +29,22 @@
           <label class="mamberInfoTitle">Email: </label
           ><span id="email" class="mamberPageInfo"></span>
         </div>
+        <div class="info">
+          <label class="mamberInfoTitle">Phone: </label
+          ><span id="phone" class="mamberPageInfo"></span>
+        </div>
       </div>
 
     </div>
    
     <script>
-      var id = localStorage['id'];
+      var id = localStorage['userid'];
       var username = localStorage['username'];
+      var useremail = localStorage['useremail'];
 
       $('#memberid').html(id);
       $('#name').html(username);
+      $('#email').html(useremail);
     </script>
 
   </body>

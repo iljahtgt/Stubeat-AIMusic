@@ -18,31 +18,42 @@
 
         <ul class="nav navbar-nav navbar-right">
             <!-- <li><a href="/" style="color: white" class="aHover">Home</a></li> -->
-            <!-- <li><a href="/account/member" style="color: white; display: none" class="aHover" id="member"></a></li> -->
+            <!-- <li style="margin-top: 15px; font-family: 'Lobster', cursive;" id="welcome">Welcome：<a href="/account/member" -->
+                    <!-- style="display: inline;color:blue;margin:0;padding:0;" class="aHover" id="member"></a></li> -->
+            <li><a href="/account/member" style="color: white; display: none" class="aHover" id="welcome"></a></li>
             <li><a href="/about" style="color: white" class="aHover">About</a></li>
             <li><a href="/purchase/shop" style="color: white" class="aHover">Contact Us</a></li>
-            <!-- <li><a href="/account/login" style="color: white" class="aHover" id="login">Login</a></li> -->
-            <!-- <li><a style="color: white; display: none; cursor: pointer;" class="aHover" id="logout">Logout</a></li> -->
-            <% if(loginStatus) { %>
-                <li style="margin-top:14px ;"> <%= user.username %><%= user.First_Name%></li>
-                <li><a href="/logout" style="color: white; cursor: pointer;" class="aHover" id="logout">Logout</a></li>
-                <% }else{ %>
             <li><a href="/account/login" style="color: white" class="aHover" id="login">Login</a></li>
-            <% } %>
-            <!-- <li><a href="/purchase/cart" class="glyphicon glyphicon-shopping-cart aHover"
-                    style="color: white; font-size: 18px;"><span id="badge" class="badge"></span></a></li> -->
-            <!-- <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Social Media</a></li>
-                    <li><a href="#">Donate</a></li>
-                </ul> -->
+            <li><a style="color: white; display: none; cursor: pointer;" class="aHover" id="logout">Logout</a></li>
+
             </li>
         </ul>
 
     </div><!-- /.navbar-collapse -->
 
-
-
 </nav>
 
+<%- include('scripts') -%>
+
+    <script>
+        $(document).ready(function () {
+            if (localStorage["loginStatus"] === 'true') {
+                $('#logout').show();
+                $('#welcome').show();
+                $('#welcome').html(localStorage["username"])
+                $('#login').hide();
+                
+            } else {
+                $('#logout').hide();
+                $('#login').show();
+                $('#welcome').hide();
+            }
+        })
+
+        $('#logout').click(function () {
+            localStorage.clear();
+            window.location.href = '/';
+            alert("已登出");
+        })
+
+    </script>
