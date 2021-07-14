@@ -108,7 +108,28 @@
                 var emailFlag = false;
 
                 // login
-                $("#loginBtn").click(function () {
+                $("#loginBtn").click(Login);
+                $("#pwd").keypress((event) => {
+                    if (event.keyCode === 13) {
+                        event.preventDefault();
+                        $("#loginBtn").click();
+                    }
+                });
+
+                // sign up
+                $('#signupBtn').click(Signup);
+
+                // chack email
+                $('#addemail').blur(emailCheck);
+
+                // check password format
+                // document.getElementById("addpassword").onblur = checkPwd;
+                $("#addpassword").blur(checkPwd);
+
+                // check usename
+                $('#addusername').blur(usernameCheck);
+
+                function Login() {
                     var email = $("#email").val();
                     var password = $("#pwd").val();
                     if (email && password) {
@@ -140,10 +161,9 @@
                     } else {
                         alert("請填登入資訊");
                     }
-                });
+                };
 
-                // sign up
-                $('#signupBtn').click(function () {
+                function Signup() {
                     var username = $('#addusername').val();
                     var email = $('#addemail').val();
                     var password = $('#addpassword').val();
@@ -169,11 +189,8 @@
                     } else {
                         alert("欄位有問題");
                     };
-                })
+                }
 
-
-                // check password format
-                document.getElementById("addpassword").onblur = checkPwd;
                 function checkPwd() {
                     //取得addpassword元素
                     let thePwdObj = document.getElementById("addpassword");//拿到欄位ＩＤ
@@ -218,8 +235,7 @@
                     }
                 }
 
-                // chack if email already exists
-                $('#addemail').blur(function () {
+                function emailCheck() {
                     var emailCheck = $('#addemail').val();
                     if (emailCheck === '') {
                         $('#emailMessage').html('不可空白');
@@ -243,16 +259,15 @@
                             alert(JSON.stringify(err));
                         });
                     }
-                })
+                }
 
-                // check usename
-                $('#addusername').blur(function () {
+                function usernameCheck() {
                     if ($('#addusername').val() === '') {
                         $('#nameMessage').html('不可空白');
                     } else {
                         $('#nameMessage').html('👍')
                     }
-                })
+                };
 
 
             </script>

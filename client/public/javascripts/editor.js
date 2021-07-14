@@ -74,7 +74,6 @@ function init() {
     $('#sampleAfter1').on("click", () => samplePlayer('/samples/sample1_after.json'));
     $('#sampleBefore2').on("click", () => samplePlayer('/samples/sample2_before.json'));
     $('#sampleAfter2').on("click", () => samplePlayer('/samples/sample2_after.json'));
-    // $('#addToDB').on("click", () => addToDB(trainedSet));
 };
 
 
@@ -223,46 +222,3 @@ function transferNotes(x) {
         velocity: 100
     })
 };
-
-// $('#sampleBefore').click(() => {
-
-//     var unquantizedSeq = {
-//         notes: [],
-//         totalTime: 8
-
-//     }
-
-//     samplePlayer = new mm.SoundFontPlayer('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus');
-
-//     if (rnnPlayer.isPlaying()) {
-//         rnnPlayer.stop();
-//         return;
-//     }
-
-//     var midi = new Midi.fromUrl('/samples/Sample_before.mid');
-//     console.log(midi);
-//     midi.then((sample) => {
-//         var sets = sample.tracks[0].notes;
-//         console.log(sets);
-
-//         Array.prototype.forEach.call(sets, x => {
-//             unquantizedSeq.notes.push({
-//                 pitch: x.midi,
-//                 startTime: x.ticks / 480,
-//                 endTime: (x.ticks + 55) / 480,
-//                 instrument: 0,
-//                 isDrum: true,
-//                 velocity: 100
-//             })
-//         })
-
-//         console.log(unquantizedSeq);
-//         unquantizedSeq.totalTime = sample.totalTime;
-//         samplePlayer.start(unquantizedSeq);
-//         var qSet = mm.sequences.quantizeNoteSequence(unquantizedSeq, 4);
-//         console.log(qSet);
-//     });
-
-
-// });
-

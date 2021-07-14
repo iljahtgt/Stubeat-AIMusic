@@ -6,4 +6,8 @@ router.get('/editor', function(req, res, next) {
   res.render('pages/music/editor');
 });
 
+router.get('/pro', function(req, res, next) {
+  res.render('pages/music/pro');
+});
+
 module.exports = router;

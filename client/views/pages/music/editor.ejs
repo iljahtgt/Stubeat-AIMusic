@@ -357,13 +357,15 @@
                 <%- include('../../partials/scripts') -%>
                         <script>
 
-                                $('#addToDB').click(() => {
+                                $('#addToDB').click(addToDB);
+
+                                function addToDB() {
                                         if (!localStorage["loginStatus"]) {
                                                 alert('想收藏音樂，請先登入');
                                                 window.location.href = '/account/login';
                                         } else {
                                                 // console.log(trainedSet);
-      
+
                                                 data = {
                                                         id: parseInt(localStorage["userid"]),
                                                         musicname: $('#saveNameAs').val(),
@@ -380,7 +382,7 @@
                                                         console.log('fail');
                                                 });
                                         }
-                                });
+                                }
                         </script>
 </body>
 
