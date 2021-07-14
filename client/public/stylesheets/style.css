@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
 
+/* navigation bar */
 .navbar-default {
     background-color: rgb(255,215,0);
     border-color: rgb(255,215,0);
@@ -11,27 +12,14 @@
     font-family: 'Lobster', cursive;
 }
 
+.fontCaveat:hover{
+  font-size: 40px;
+}
+
 .index_container{
     position: relative;
     text-align: center;
     color: white;
-}
-
-.index_centered{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: black;
-    font-family:'Lobster', cursive;
-    font-size: 10vw;
-}
-
-.btn_centered{
-    position: absolute;
-    top: 90%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 }
 
 .navbar{
@@ -47,28 +35,29 @@
   font-size: 30px;
 }
 
+/* index page */
+.index_centered{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: black;
+  font-family:'Lobster', cursive;
+  font-size: 10vw;
+}
+
+.btn_centered{
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 .btn_try{
   font-size: 1vw;
   font-family: 'Courgette', cursive;
 }
 
-.left{
-  position: absolute;
-  left: auto;
-  width: 15vw;
-  height: 800px;
-  border: 3px solid black;
-}
-
-.right{
-  position: absolute;
-  left: 15vw;
-  width: 85vw;
-  height: 800px;
-  border: 3px solid green;
-
-}
-
+/* member page */
 .memberCard {
   /* height: 300px; */
   width: 50%;
@@ -92,10 +81,21 @@
   font-family: Georgia, "Times New Roman", Times, serif;
 }
 
+.musicContainer{
+  width: 50%;
+  margin: 20px auto;
+}
+
+td.userBtn button{
+  /* vertical-align: middle; */
+  text-align: center;
+  margin-top: 0px;
+}
+
 /* Login page */
 #addMem{
   width: 25%;
-  height: 75%;
+  height: 45%;
   margin-left:37%;
   margin-top:5%;
   background-color: whitesmoke;
@@ -136,8 +136,31 @@ div.container{
   width: 100%;
 }
 
+div.tip{
+  margin-top: 0;
+  padding: 0;
+}
+
 /* Music Editor page */
-.customizeLabels{
+.left{
+  position: absolute;
+  left: auto;
+  width: 15vw;
+  height: 800px;
+  border: 3px groove black;
+  overflow: auto;
+}
+
+.right{
+  position: absolute;
+  left: 15vw;
+  width: 85vw;
+  height: 800px;
+  border: 3px groove black;
+  overflow: auto;
+}
+
+.customize{
   padding-top: 20px;
   padding-left: 10px;
   padding-bottom: 15px;
@@ -154,8 +177,15 @@ div.container{
 }
 
 .editorBtns {
+  /* position: absolute; */
   padding: 10px;
   text-align: right;
+  /* left: 80%; */
+  /* bottom: 20px; */
+}
+
+.sampleList{
+  width: 100%;
 }
 
 .samples{
@@ -169,17 +199,20 @@ div.container{
 
 .leftBottom{
   position: absolute;
-  width: 90%;
+  width: 80%;
   text-align: center;
   margin-left: 20px;
   bottom: 20px;
 }
 
+#fileBtn, #fileinput{
+  width: 95%;
+}
+
+/* about page */
 .aboutContent{
   width: 50%;
   margin: 20px auto;
   text-align: center;
   font-size: 20px;
-  
-
 }

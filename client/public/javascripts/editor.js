@@ -70,13 +70,16 @@ function init() {
     $('#savetoJson').on('click', () => saveAs(new File([JSON.stringify(testset)], 'sample.json')));
     $('#savetoJson_rnn').on('click', () => saveAs(new File([JSON.stringify(trainedSet)], 'sample.json')));
 
-    $('#sampleBefore').on("click", () => samplePlayer('/samples/sampleBefore.json'));
-    $('#sampleAfter').on("click", () => samplePlayer('/samples/sampleAfter.json'));
-}
+    $('#sampleBefore1').on("click", () => samplePlayer('/samples/sample1_before.json'));
+    $('#sampleAfter1').on("click", () => samplePlayer('/samples/sample1_after.json'));
+    $('#sampleBefore2').on("click", () => samplePlayer('/samples/sample2_before.json'));
+    $('#sampleAfter2').on("click", () => samplePlayer('/samples/sample2_after.json'));
+    // $('#addToDB').on("click", () => addToDB(trainedSet));
+};
 
 
 sPlayer = new mm.SoundFontPlayer('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus');
-function samplePlayer(filePath){
+function samplePlayer(filePath) {
     if (sPlayer.isPlaying()) {
         sPlayer.stop();
         return;
@@ -191,12 +194,12 @@ function musicRnn() {
         rnnPlayer.stop();
         return;
     }
-
     // The model expects a quantized sequence, and ours was unquantized:
     // const qns = mm.sequences.quantizeNoteSequence(testset, 4);
     music_rnn
         .continueSequence(testset, rnn_steps, rnn_temperature)
         .then((sample) => makeSample(sample));
+
 }
 
 function makeSample(s) {

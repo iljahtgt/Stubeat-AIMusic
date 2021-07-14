@@ -47,6 +47,10 @@
                                         overflow: auto;
                                         background-color: #232426;
                                 }
+
+                                .samples h3 {
+                                        text-align: center;
+                                }
                         </style>
 </head>
 
@@ -57,8 +61,12 @@
                 <h1>Music Editor</h1>
                 <div class="left" id="sampleList">
                         <div class="samples">
-                                <button id="sampleBefore" class="btn btn-default">Sample (Before)</button>
-                                <button id="sampleAfter" class="btn btn-default">Sample (After)</button>
+                                <h3>Sample 1</h3>
+                                <button id="sampleBefore1" class="btn btn-default">Before</button>
+                                <button id="sampleAfter1" class="btn btn-default">After</button>
+                                <h3>Sample 2</h3>
+                                <button id="sampleBefore2" class="btn btn-default">Before</button>
+                                <button id="sampleAfter2" class="btn btn-default">After</button>
                         </div>
 
                         <div class="leftBottom">
@@ -319,11 +327,12 @@
 
                                 </div>
                                 <div class="customizeBtns">
-                                        <button id="play" class="btn btn-info"><i class="glyphicon glyphicon-play"></i>
+                                        <button id="play" class="btn btn-default"><i
+                                                        class="glyphicon glyphicon-play"></i>
                                                 Play</button>
-                                        <button id="savebtn" class="btn btn-info"><i
+                                        <button id="savebtn" class="btn btn-default"><i
                                                         class="glyphicon glyphicon-download-alt"></i> Download</button>
-                                        <button id="savetoJson" class="btn btn-info">Save Json</button>
+                                        <!-- <button id="savetoJson" class="btn btn-info">Save Json</button> -->
                                 </div>
 
 
@@ -331,11 +340,14 @@
 
                         <div class="editorBtns">
 
-                                <button id="generate" class="btn btn-info"><i class="fa fa-spinner"
+                                <button id="generate" class="btn btn-default"><i class="fa fa-spinner"
                                                 aria-hidden="true"></i> Generate Music</button>
-                                <button id="saveTrainedbtn" class="btn btn-info"><i
+                                <button id="saveTrainedbtn" class="btn btn-default"><i
                                                 class="glyphicon glyphicon-download-alt"></i> Download</button>
-                                <button id="savetoJson_rnn" class="btn btn-info">Save Json</button>
+                                <!-- <button id="savetoJson_rnn" class="btn btn-info">Save Json</button> -->
+                                <button id="addToDB" class="btn btn-default">
+                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
                         </div>
 
                 </div>
@@ -343,6 +355,33 @@
 
 
                 <%- include('../../partials/scripts') -%>
+                        <script>
+
+                                $('#addToDB').click(() => {
+                                        if (!localStorage["loginStatus"]) {
+                                                alert('想收藏音樂，請先登入');
+                                                window.location.href = '/account/login';
+                                        } else {
+                                                // console.log(trainedSet);
+      
+                                                data = {
+                                                        id: parseInt(localStorage["userid"]),
+                                                        musicname: $('#saveNameAs').val(),
+                                                        music: trainedSet
+                                                }
+                                                $.ajax({
+                                                        type: 'post',
+                                                        url: 'http://localhost:1337/api/saveData',
+                                                        data: JSON.stringify(data),
+                                                        contentType: "application/json;charset=utf-8"
+                                                }).done(() => {
+                                                        alert('已收藏');
+                                                }).fail(() => {
+                                                        console.log('fail');
+                                                });
+                                        }
+                                });
+                        </script>
 </body>
 
 </html>
