@@ -36,6 +36,17 @@
   width: 100%;
   /* margin-top: 60px; */
 }
+
+.keyboard-box-2 {
+  background: var(--blue);
+  padding: var(--spacing);
+  border: var(--border-l);
+  border-radius: 14px;
+  display: inline-block;
+  width: 84vw;
+  /* margin-top: 60px; */
+}
+
 .keyboard {
   --black-width: 13px;
   --num-white: 15;

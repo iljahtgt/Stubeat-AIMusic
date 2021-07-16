@@ -58,9 +58,9 @@
                 </div>
                 <div class="form-group">
                     <div class="btns">
-                        <button class="btn btn-primary" id="loginBtn">登入</button>
+                        <button class="btn btn-primary" id="loginBtn">Login</button>
                         <button type="button" class="btn btn-primary" data-toggle="modal"
-                            data-target="#addMem">註冊</button>
+                            data-target="#addMem">Join</button>
                         <div class="messSpan alert-danger" id="errorMessage" style="margin-top: 10px;"></div>
                     </div>
                 </div>
@@ -73,31 +73,34 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3 class="modal-title">註冊會員</h3>
+                            <h3 class="modal-title">Create your StuBeat Account</h3>
                         </div>
                         <div class="modal-body">
-                            <div class="container">
+                            <!-- <div class="container"> -->
                                 <div class="form-group">
-                                    <label for="addusername">使用者名稱：</label>
+                                    <label for="addusername">Username:</label>
                                     <input id="addusername" name="username" type="text" class="form-control" required>
                                     <span class="errorMes" id="nameMessage"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="addemail">使用者信箱：</label>
+                                    <label for="addemail">Email: </label>
                                     <input id="addemail" name="email" type="email" class="form-control" required>
                                     <span class="errorMes" id="emailMessage"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="addpassword">使用者密碼：</label>
+                                    <label for="addpassword">Password:</label>
                                     <input id="addpassword" name="password" type="password" size="6"
                                         class="form-control" required>
                                     <span class="errorMes" id="idsp"></span>
-                                    <div class="tip">(英數混合及6位數以上)</div>
-                                    <button class="btn btn-primary" id="signupBtn" type="submit">註冊</button>
-                                    <button type="reset" class="btn btn-success">Reset</button>
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                                    <div class="tip">Use 6 character or more</div>
+
                                 </div>
-                            </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary" id="signupBtn" type="submit">Next</button>
+                                    <button id="reset" type="reset" class="btn btn-success">Reset</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            <!-- </div> -->
                         </div>
                     </div>
                 </div>
@@ -129,6 +132,18 @@
                 // check usename
                 $('#addusername').blur(usernameCheck);
 
+                $('#reset').click(reset);
+
+                function reset() {
+                    $('#addusername').val('');
+                    $('#addemail').val('');
+                    $("#addpassword").val('');
+                    $('#nameMessage').val('');
+                    $('#emailMessage').val('');
+                    $('#idsp').val('');
+
+                }
+
                 function Login() {
                     var email = $("#email").val();
                     var password = $("#pwd").val();
@@ -146,7 +161,8 @@
                             .done(function (result) {
                                 localStorage.clear();
                                 if (result.length == 0) {
-                                    $("#errorMessage").html("會員不存在");
+                                    $("#errorMessage").html("Couldn't find your StuBeat account");
+                                    return
                                 }
                                 console.log(result[0]);
                                 localStorage.setItem("loginStatus", true);
@@ -159,7 +175,7 @@
                                 alert("Error: " + err);
                             });
                     } else {
-                        alert("請填登入資訊");
+                        alert("Enter your email and password");
                     }
                 };
 
@@ -187,7 +203,7 @@
                             alert('Error: ' + err.errorText);
                         })
                     } else {
-                        alert("欄位有問題");
+                        alert("Something's wrong");
                     };
                 }
 
@@ -205,7 +221,7 @@
                     let thePwdObjValLen = thePwdObjVal.length;//拿到輸入內容長度
                     let flag1 = false, flag2 = false, flag3 = false;
                     if (thePwdObjVal == "")
-                        sp.innerHTML = "不可空白";
+                        sp.innerHTML = "Enter a password";
 
                     // sp.innerHTML = "you need enter";
                     else if (thePwdObjValLen >= 6) {
@@ -227,18 +243,18 @@
                         if (flag1 && flag2)
                             sp.innerHTML = "👍";
                         else if (flag1)
-                            sp.innerHTML = "❌ 缺少數字";
+                            sp.innerHTML = "❌ Need numbers";
                         else if (flag2)
-                            sp.innerHTML = "❌ 缺少英文";
+                            sp.innerHTML = "❌ Need letters";
                     } else {
-                        sp.innerHTML = "❌ 需要6個以上的字元";
+                        sp.innerHTML = "❌ Need 6 or more characters";
                     }
                 }
 
                 function emailCheck() {
                     var emailCheck = $('#addemail').val();
                     if (emailCheck === '') {
-                        $('#emailMessage').html('不可空白');
+                        $('#emailMessage').html('Enter a email address');
                         emailFlag = false;
                     } else {
                         var data = { email: emailCheck }
@@ -249,10 +265,10 @@
                             contentType: 'application/json;charset=utf-8'
                         }).done(function (res) {
                             if (res.length > 0) {
-                                $('#emailMessage').html('會員已存在');
+                                $('#emailMessage').html('Member exists');
                                 emailFlag = false;
                             } else {
-                                $('#emailMessage').html('👍')
+                                $('#emailMessage').html('👍');
                                 emailFlag = true;
                             }
                         }).fail(function (err) {
@@ -263,7 +279,7 @@
 
                 function usernameCheck() {
                     if ($('#addusername').val() === '') {
-                        $('#nameMessage').html('不可空白');
+                        $('#nameMessage').html('Enter a username');
                     } else {
                         $('#nameMessage').html('👍')
                     }

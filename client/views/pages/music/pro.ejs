@@ -18,75 +18,19 @@
 <body>
     <%- include('../../partials/navbar.ejs') -%>
         <h1>Pro!</h1>
-        <div class="nameContainer">
-            <label for="saveNameAs_piano" class="labelPiano">Sample Name:
-                <input id="saveNameAsPiano" type="text" value="Untitled"></label>
-        </div>
-        <!-- <section> -->
-        <!-- <h1>DrumBot</h1>
-        <div class="preamble">
-          <p>Need a drummer but don't know anybody? Try <b>DrumBot</b>!
-            Play real-time music with a machine learning drummer
-          that drums based on your melody.</p>
-        </div> -->
-        <!-- 區塊：選擇keyboard或midi輸入 -->
-        <!-- <div class="settings controls small centered">
-          <h2>Settings</h2>
-          You're going to play music on your...<br>
-          <label class="radio">
-            <input name="input" type="radio" id="inputKeyboard" checked>
-            <span class="control-indicator"></span>
-            Keyboard
-          </label>
-          <br>
-          <label class="radio">
-            <input name="input" type="radio" id="inputMidi">
-            <span class="control-indicator"></span>
-            MIDI
-          </label>
-          <div id="midiContainer" hidden>
-            <label>Input: <select id="selectMidiIn" class="button"></select></label>
-            <label>Output: <select id="selectMidiOut" class="button"></select></label>
-          </div>
-
-          <div id="textMidiNotSupported" hidden>MIDI isn't supported on this browser :(</div>
-          <br>
-          <button class="button" id="btnReady">
-            <span class="text">I'm ready!</span>
-          </button>
-        </div>
-      </section> -->
         <!-- 主要樂器控制面板區塊 -->
-        <!-- <section class="main" hidden> -->
         <section class="main">
-            <!-- <section class="controls centered rotate">
-            <h2>Your screen is not wide enough :(</h2>
-            <p>Your screen is not wide enough for this app to work well (it displays an octave worth's of keys, and they'll be hard to press 😢).
-              If you're on mobile, please rotate your device. If you're on a very tiny mobile, I'm afraid you'll have to look for a larger device.
-            </p>
-            <button class="button" onclick="document.querySelector('.rotate').hidden=true">
-              <span class="text">I don't care, hide this.</span>
-            </button>
-          </section> -->
             <div class="keyboard-shadow">
                 <div class="keyboard-box">
                     <div class="horizontal">
                         <!-- 節拍器數字顯示處 -->
                         <!-- 下一行若刪了，錄音鍵按下後無法變成停止鍵，無法錄音。 -->
                         <div id="tickDisplay"></div>
-
                         <!-- 下一行若刪了，按過的琴鍵無法變回白色，但仍可錄音。 -->
                         <div id="statusUpdate" style="color:white; font-size: 18px;">Loading soundfont files...</div>
-                        <!-- <button hidden class="button instruments" title="change instrument"> -->
-                        <!-- <select id="dropInstruments"></select> -->
-                        <!-- <span class="hide-select"> -->
-                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg> -->
-                        <!-- </span> -->
-                        <!-- </button>  -->
                     </div>
 
                     <div class="controls horizontal top">
-
                         <!-- 彈奏視覺化記錄圖譜 -->
                         <div class="visualizer">
                             <div id="timeline"></div>
@@ -95,7 +39,6 @@
                             <svg id="svgDrums"></svg>
                         </div>
 
-                        <!-- 旋律儲存按鍵(原創的此按鍵即有Bug，暫不用，隱藏) -->
                         <div class="vertical" hidden>
                             <button class="button" id="btnSave">
                                 <!-- Icon from: https://material.io/resources/icons/ -->
@@ -152,7 +95,7 @@
                     </div>
                     <div class="horizontal bottom">
                         <!-- 鼓、琴鍵、節拍器聲音大小調整區 -->
-                        <!-- 下一行若刪了，錄音鍵按下後無法變成停止鍵，但仍可錄音。隱藏 -->
+                        <!-- 下一行若刪了，錄音鍵按下後無法變成停止鍵，但仍可錄音。-->
                         <div class="vertical volume-controls" disabled hidden>
                             <!-- <b class="volume-label">loops</b> -->
                             <div class="horizontal">
@@ -163,11 +106,6 @@
                                 <div class="range-wrap"><input type="range" min="0" max="1" step="1" value="1"
                                         id="inputMuteClick"></div>
                             </div>
-                            <!-- <div class="horizontal">
-                            <label class="range-label">🥁</label>
-                            <label class="range-label">🎹</label>
-                            <label class="range-label">⏱</label>
-                          </div> -->
                         </div>
 
                         <!-- 琴鍵區 -->
@@ -226,11 +164,6 @@
                             <br>
                             <!-- 【replay RNN】 -->
                             <button class="button" id="btnReplayRNN" style="width:35%">
-
-                                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"
-                                    class="play">
-                                    <path d="M8 5v14l11-7z" />
-                                </svg> -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"
                                     class="play">
                                     <path d="M8 5v14l11-7z" />
@@ -239,44 +172,25 @@
                                     class="stop" hidden>
                                     <path d="M6 6h12v12H6z" />
                                 </svg>
-                                <span class="text">Replay RNN</span>
+                                <span class="text">replay</span>
                             </button>
                             <br>
-
-                            <!-- <button class="button" id="btn-downloadRNN" style="width:35%">
-
-                                <span class="material-icons">download</span>
-                                <span class="text">DownloadRNN</span>
-                            </button> -->
-
                         </div>
                         <div class="vertical" style="margin-bottom: 15px;">
                             <div class="horizontal controls centered" style="margin-top: 15px;">
 
-                                <!-- <button class="button" id="btnRNN" style="width:35%">
-                                    <span class="material-icons">queue_music</span>
-                                    <span class="text">generate RNN</span>
-                                </button>
-                                <br>
-                                
-                                <button class="button" id="btnReplayRNN" style="width:35%">
-    
-                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"
-                                        class="play">
-                                        <path d="M8 5v14l11-7z" />
-                                    </svg>
-                                    <span class="text">Replay RNN</span>
-                                </button>
-                                <br> -->
+                                <div class="nameContainer">
+                                    <label for="saveNameAs_piano"style="color:white; font-size: 18px;">Sample Name:
+                                        <input id="saveNameAsPiano" type="text" value="Untitled" style="width:40%"></label>
+                                </div>
+                        
                                 <!-- 【download RNN】 -->
-                                <button class="button" id="btn-downloadRNN" style="width:35%">
-
+                                <button class="button" id="btn-downloadRNN" style="width:40%;margin-right:10px">
                                     <span class="material-icons">download</span>
                                     <span class="text">DownloadRNN</span>
                                 </button>
-
-                                <button class="button" id="addToDB_piano" style="width:35%">
-
+                                <br>
+                                <button class="button" id="addToDB_piano" style="width:20%">
                                     <span class="material-icons"><i class="fa fa-plus" aria-hidden="true"></i></span>
                                     <span class="text">Add</span>
                                 </button>

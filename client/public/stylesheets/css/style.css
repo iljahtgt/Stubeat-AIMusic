@@ -15,27 +15,39 @@
  * limitations under the License.
  */
 
-.nameContainer{
-  text-align:center;
-  font-size: 20px;
+input#saveNameAsPiano {
+  border-radius: 5px;
+  border: var(--border);
+  line-height: 40px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 5px;
+  background: white;
+  color: black;
 }
 
-input#saveNameAsPiano{
-  width: 200px;
+* {
+  box-sizing: border-box;
+}
+[disabled] {
+  pointer-events: none;
+  opacity: 0.3;
+}
+[disabled] * {
+  pointer-events: none;
 }
 
-* {box-sizing:border-box}
-[disabled] {pointer-events:none;opacity:0.3}
-[disabled] * {pointer-events:none}
-
-[hidden] {display: none !important}
+[hidden] {
+  display: none !important;
+}
 
 html {
   --light-red: #ffd756;
-  --red: #F05A63;
+  --red: #f05a63;
   --blue: #7e4a35;
-  --grey: #B2B2B2;
-  --spacing-s: 8px; 
+  --grey: #b2b2b2;
+  --spacing-s: 8px;
   --spacing: 14px;
   --spacing-l: 24px;
   --border: 3px solid black;
@@ -44,13 +56,14 @@ html {
 }
 
 body {
-  font-family: 'Roboto Mono', monospace;
-  /* margin: 2em; */
+  font-family: "Roboto Mono", monospace;
   background: lightyellow;
   -webkit-font-smoothing: antialiased;
   line-height: 1.5;
 }
-.sans { font-family: sans-serif !important; }
+.sans {
+  font-family: sans-serif !important;
+}
 .upright {
   writing-mode: vertical-rl;
   text-orientation: upright;
@@ -58,30 +71,17 @@ body {
   letter-spacing: -4px;
 }
 
-a:link, a:visited {
+a:link,
+a:visited {
   color: white;
   font-weight: bold;
 }
 
 h1 {
   text-align: center;
-  font-family: 'Lobster', cursive;
+  font-family: "Lobster", cursive;
   font-size: 4vw;
 }
-
-/* h1 {
-  font-size: 2em;
-}
-h1, h2 {
-  text-align: center;
-  color: white;
-}
-p {
-  padding: var(--spacing-l) 0; 
-}
-li {
-  margin-bottom: var(--spacing);
-} */
 
 section {
   width: 100%;
@@ -129,7 +129,9 @@ section {
 /*
  * Splash screen
  */
-.preamble, summary, .main {
+.preamble,
+summary,
+.main {
   text-align: center;
 }
 
@@ -137,7 +139,7 @@ section {
  * Radio buttons
  */
 .control-indicator {
-  border:  var(--border);
+  border: var(--border);
   border-radius: 2px;
 }
 .radio {
@@ -152,11 +154,11 @@ section {
   opacity: 0;
   z-index: -1;
 }
-.radio >  input:focus ~ .control-indicator {
+.radio > input:focus ~ .control-indicator {
   background-color: var(--light-red);
   box-shadow: var(--shadow);
 }
-.radio >  input:checked ~ .control-indicator {
+.radio > input:checked ~ .control-indicator {
   background-color: var(--red) !important;
 }
 
@@ -185,7 +187,7 @@ section {
   border: var(--border);
   margin-bottom: 14px;
   padding: var(--spacing-s);
-  color: black
+  color: black;
 }
 .controls.centered {
   text-align: left;
@@ -193,6 +195,7 @@ section {
   margin: var(--spacing) auto;
   padding: var(--spacing-l);
 }
+
 .controls.small {
   max-width: 500px;
 }
@@ -200,6 +203,7 @@ section {
   margin-left: auto;
   margin-right: auto;
 }
+
 .controls h2 {
   color: black;
 }
@@ -207,7 +211,7 @@ section {
   /* margin:auto;
   margin-left: auto;
   margin-right: auto; */
-  background:none;
+  background: none;
   border: none;
   margin: 0 var(--spacing);
   padding: 0 var(--spacing-s);
@@ -237,7 +241,7 @@ section {
   font-family: inherit;
   font-size: 16px;
   font-weight: bold;
-  box-shadow: 0 3px var(--grey); 
+  box-shadow: 0 3px var(--grey);
   cursor: pointer;
   height: 50px;
 }
@@ -260,8 +264,9 @@ button.button:hover {
   border: var(--border);
   border-radius: 50%;
 }
-.button > span, .button > svg  {
-  vertical-align: middle;  
+.button > span,
+.button > svg {
+  vertical-align: middle;
 }
 
 label.small {
@@ -303,7 +308,7 @@ select {
   margin: 0 var(--spacing);
   padding: 0 var(--spacing-s);
   /* width: 264px;  */
-  width:100%;
+  width: 100%;
   overflow: hidden;
   border: var(--border);
   position: relative;
@@ -313,7 +318,7 @@ select {
   top: 0;
   bottom: 0;
   left: 0px;
-  width:200%;
+  width: 200%;
 }
 
 .visualizer rect {
@@ -329,7 +334,8 @@ select {
   left: 0;
 }
 
-#tickDisplay, .instruments {
+#tickDisplay,
+.instruments {
   height: 40px;
   width: 40px;
   border-radius: 50%;
@@ -388,7 +394,7 @@ select {
 /*
  * input type=range is truly the worst.
  */
-input[type=range] {
+input[type="range"] {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -398,19 +404,19 @@ input[type=range] {
   height: var(--thumb-w);
   transform: translate(-50%, -50%) rotate(-90deg);
 }
-input[type=range] {
-  -webkit-appearance: none; 
+input[type="range"] {
+  -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   background: transparent;
   border-bottom: none;
 }
-input[type=range]:hover {
+input[type="range"]:hover {
   background: transparent;
 }
 
- /* Thumb */
-input[type=range]::-webkit-slider-thumb {
+/* Thumb */
+input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   border: none;
   height: var(--thumb-w);
@@ -420,7 +426,7 @@ input[type=range]::-webkit-slider-thumb {
   border: 2px solid black;
   cursor: pointer;
 }
-input[type=range]::-moz-range-thumb {
+input[type="range"]::-moz-range-thumb {
   -webkit-appearance: none;
   border: none;
   height: var(--thumb-w);
@@ -430,7 +436,7 @@ input[type=range]::-moz-range-thumb {
   border: 2px solid black;
   cursor: pointer;
 }
-input[type=range]::-ms-thumb {
+input[type="range"]::-ms-thumb {
   -webkit-appearance: none;
   border: none;
   height: var(--thumb-w);
@@ -440,30 +446,30 @@ input[type=range]::-ms-thumb {
   border: 2px solid black;
   cursor: pointer;
 }
-input[type=range]::-webkit-slider-thumb:hover {
+input[type="range"]::-webkit-slider-thumb:hover {
   transform: scale(1.5);
 }
-input[type=range]::-moz-range-thumb:hover {
+input[type="range"]::-moz-range-thumb:hover {
   transform: scale(1.5);
 }
-input[type=range]::-ms-thumb:hover {
+input[type="range"]::-ms-thumb:hover {
   transform: scale(1.5);
 }
 
- /* Track */
-input[type=range]::-webkit-slider-runnable-track {
+/* Track */
+input[type="range"]::-webkit-slider-runnable-track {
   height: var(--track-size);
   cursor: pointer;
   background: var(--red);
   border: 2px solid black;
 }
-input[type=range]::-moz-range-track {
+input[type="range"]::-moz-range-track {
   height: var(--track-size);
   cursor: pointer;
   background: var(--red);
   border: 2px solid black;
 }
-input[type=range]::-ms-track {
+input[type="range"]::-ms-track {
   height: var(--track-size);
   cursor: pointer;
   background: var(--red);
@@ -513,12 +519,23 @@ input[type=range]::-ms-track {
   .rotate {
     display: block;
   }
-  
+
   .bottom .octaves {
     display: none;
-  } 
+  }
   .keyboard {
     margin: 30px;
     --black-width: 8px !important;
   }
+}
+
+.labelPiano {
+  display: block;
+  stroke: black;
+  stroke-width: 3px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  height: 60px;
 }

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var con = require('../config/connection.js');
-var bcrypt = require('bcrypt');
+// var bcrypt = require('bcrypt');
 
 // Tsai's Code
 // login
