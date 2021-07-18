@@ -205,15 +205,16 @@
         <br><br>
 
 
-
         <%- include('../../partials/scripts') -%>
+
+        <%- include('../../partials/chatBot') -%>
             <script>
 
                 $('#addToDB_piano').click(addToDB);
 
                 function addToDB() {
                     if (!localStorage["loginStatus"]) {
-                        alert('想收藏音樂，請先登入');
+                        alert('Login first to add music to favorite');
                         window.location.href = '/account/login';
                     } else {
                         // console.log(trainedSet);
@@ -229,7 +230,7 @@
                             data: JSON.stringify(data),
                             contentType: "application/json;charset=utf-8"
                         }).done(() => {
-                            alert('已收藏');
+                            alert('Add to favorite');
                         }).fail(() => {
                             console.log('fail');
                         });

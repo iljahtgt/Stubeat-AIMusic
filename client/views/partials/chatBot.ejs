@@ -1,0 +1,57 @@
+
+<div id="dialog">
+    <iframe id="myIframe" class="control-label col-sm-2" src="" style="display:none;"></iframe>
+</div>
+
+<h4><span id="idspanup" class="btn btn-warning">Welcome to StuBeat!</span></h4>
+<img id="idicon" src="/images/close_icon.jpg" width="60" />
+
+<h4><span id="idspan" class="btn btn-warning">How can I help you?</span></h4>
+<img id="idimg" class="border border-white" src="/images/bot2.jpg" width="85" height="85" onclick="checkBot();" />
+
+
+<script>
+    function checkBot() {      // show bot dialog
+
+            $("#dialog").dialog({
+                   autoOpen: false,
+                   modal: true,
+                   show: "fade",
+                   hide: "fade",
+                   height: 600,
+                   width: 350,
+                open: function (ev, ui) {
+                     $('#myIframe').attr('src', 'https://webchat.botframework.com/embed/aien122kb-bot?s=xsmg3TiudWs.hasGNnGiVBpKjiKDiVB-Xss5NGkQqvugelQq9UgtxZY');
+                     $('#myIframe').attr('style', 'min-width: 300px; width: 100%; min-height: 420px; height: 100% ')
+                },
+                position: { my: "center center", at: "center-150 center-410", of: "#idimg" },
+                title: 'StuBeat'
+           });
+           $('#dialog').dialog('open');
+    }
+
+    // mouse change
+    $("#idimg").mouseenter(function () {
+        $(this).css("cursor", "pointer");
+        $("#idspan").css("display", "block");
+    });
+
+    $("#idimg").mouseleave(function () {
+        $(this).css("cursor", "defaule");
+        $("#idspan").css("display", "none");
+    });
+    // icon close
+    $("#idicon").click(function () {
+        $(this).css("display", "none");
+        $("#idspanup").css("display", "none");
+    });
+    // window.onload for display page doc
+    window.onload = function () {
+        $("#idspanup").css("display", "block");
+        $("#divball").css("display", "block");
+        $("#idicon").css("display", "block");
+    }
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

@@ -1,0 +1,37 @@
+#idimg { /*bot image*/
+    border-radius: 50%;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
+
+#idspan { /* bot span for doc */
+    position: fixed;
+    bottom: 40px;
+    right: 100px;
+    display: none;
+    color: darkmagenta;
+    font-weight: bolder;
+}
+
+#idicon { /* close icon*/
+    border-radius: 50%;
+    position: fixed;
+    bottom: 115px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+}
+
+#idspanup { /*page  span for doc */
+    position: fixed;
+    bottom: 100px;
+    right: 45px;
+    color: darkmagenta;
+    font-weight: bolder;
+}
+
+/* #myIframe {
+    height: 580px;
+    
+} */

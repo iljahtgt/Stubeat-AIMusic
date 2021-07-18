@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <%- include('../../partials/header') -%>
+        <%- include('../../partials/styles') -%>
+
+</head>
+
+<body>
+    <!--ajax CRUD參考AjaxClient.html-->
+    <%- include('../../partials/scripts') -%>
+        <%- include('../../partials/adminavbar.ejs') -%>
+            <div class="tab-content tabposition">
+                <div id="MemberCtrl">
+                    <div class="rows space-around">
+                        <h2>作品管理</h2>
+
+                    </div>
+                    <!-- query table -->
+                    <div id="strtext"></div>
+                    <% if(data.length){ %>
+                        <table class="table overflow-scroll">
+                            <thead>
+                                <tr>
+                                    <th>Music ID</th>
+                                    <th>Music Name</th>
+                                    <th>Member ID</th>
+                                    <th>動作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(var i=0; i< data.length; i++) { %>
+                                    <tr>
+                                        <td id="userid<%=data[i].id %>">
+                                            <%= data[i].musicid %>
+                                        </td>
+                                        <td>
+                                            <input type="text" placeholder="<%= data[i].musicname %>" class="<%= data[i].musicid %>" />
+                                            <button style="margin-top:0;" type="button" class="btn btn-primary" value="" name="edit"
+                                                id="<%= data[i].musicid %>" onclick=MusEdit(id)>修改</button>
+                                        </td>
+                                        <td>
+                                            <%= data[i].id %>
+                                        </td>
+
+                                        <td>
+                                            <!-- 更改 -->
+                                            <!-- <input type="button" class="btn btn-secondary" data-toggle="modal" data-target="#updateEmp" value="修改" /> -->
+
+                                            <input class="btn btn-danger" type="button" value="Delete" name="delete"
+                                                onclick="MusDelete('<%= data[i].musicid %>');" />
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                            </tbody>
+                        </table>
+                        <% } %>
+                </div>
+            </div>
+            </div>
+            </div>
+
+            <!-- query table finish -->
+
+
+
+
+            <input id="musicID" style="display: none;" />
+</body>
+
+<script src="/javascripts/frontscript.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+
+    });
+
+    function MusEdit(id) {
+        console.log(id);
+        var musicid = id;
+        var musicname = $(`input.${id}`).val();
+        var data = {
+            musicid: musicid,
+            musicname: musicname
+        };
+        console.log(musicname);
+        $.ajax({
+            type: "put",
+            url: "http://localhost:1337/api/musedit",
+            data: JSON.stringify(data),
+            contentType: 'application/json;charset=utf-8'
+        }).done(function (result) {
+            alert("Music Name change");
+            location.reload();
+        }).fail(function (err) {
+            console.log(err);
+        });
+    };
+
+
+</script>
+
+</html>

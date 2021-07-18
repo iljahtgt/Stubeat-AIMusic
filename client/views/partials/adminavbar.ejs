@@ -1,0 +1,50 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    
+  <div class="sidebarmenu textcenter">
+    <a href="/admin/eindex" class="navbar-brand fontCaveat" style="font-size: 30px; color: white">StuBeat 後台控制端</a>
+  </div>
+
+  <ul class="nav navbar-nav navbar-right">
+    <!-- <li><a href="/" style="color: white" class="aHover">Home</a></li> -->
+    <!-- <li style="margin-top: 15px; font-family: 'Lobster', cursive;" id="welcome">Welcome：<a href="/account/member" -->
+            <!-- style="display: inline;color:blue;margin:0;padding:0;" class="aHover" id="member"></a></li> -->
+    <li><a href="" style="color: white; display: none;" class="aHover" id="welcome"></a></li>
+    <li><a style="color: white; display: none; cursor: pointer;" class="aHover" id="logout">Logout</a></li>
+
+    </li>
+</ul>
+
+
+
+  <div class="border-end bg-white" id="admin-sidebar-wrapper">
+    <div class="p-3 sidebar-heading border-bottom bg-light">選單</div>
+    <div class="list-group list-group-flush">
+        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/empctl">員工管理</a>
+        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/memberctl" id="mctl">會員管理</a>
+    </div>
+  </div>    
+</nav>
+
+
+<script>
+
+  $(document).ready(function () {
+    if (localStorage["loginStatus"] === 'true') {
+      $('#logout').show();
+      $('#welcome').show();
+      $('#welcome').html(localStorage["username"])
+
+    } else {
+      $('#logout').hide();
+      $('#welcome').hide();
+    }
+  })
+
+  $('#logout').click(function () {
+    localStorage.clear();
+    window.location.href = 'http://localhost:3000/admin/';
+    alert("已登出");
+  })
+
+</script>

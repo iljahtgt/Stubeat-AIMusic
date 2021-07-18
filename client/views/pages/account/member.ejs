@@ -42,6 +42,8 @@
 
 			</div>
 
+			<%- include('../../partials/chatBot') -%>
+
 			<script>
 				var id = localStorage['userid'];
 				var username = localStorage['username'];
@@ -127,7 +129,7 @@
 						data: JSON.stringify(data),
 						contentType: 'application/json;charset=utf-8'
 					}).done(() => {
-						alert('已刪除');
+						alert('Deleted!');
 						location.reload();
 					}).fail((err) => {
 						console.log(err)

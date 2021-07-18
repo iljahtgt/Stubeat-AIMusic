@@ -31,6 +31,12 @@
                     margin: 0;
                 }
 
+                .demoBtn {
+                    width: 5%;
+                    height: 189px;
+                    margin: 0;
+                }
+
                 .soundBtn {
                     background-color: #ededed;
                     margin-top: 5px;
@@ -39,6 +45,22 @@
                     width: 38px;
                     height: 19px;
                     border-radius: 10px;
+                }
+                
+                .soundBtnDemo {
+                    background-color: #ededed;
+                    margin-top: 5px;
+                    margin-left: 5px;
+                    margin-right: 5px;
+                    width: 80px;
+                    height: 19px;
+                    border-radius: 10px;
+                    font-size: 10px;
+                    /* margin-bottom: 5px; */
+                }
+
+                .soundBtnDemo:hover {
+                    background-color: #ff593f;
                 }
 
                 .soundBtn:hover {
@@ -130,10 +152,23 @@
 
             <div id="editTable" class="controls horizontal top">
                 <div id="btnGroup">
-                    <div class="timeSeri"><button class="soundBtn"></button><button class="soundBtn"></button><button
-                            class="soundBtn"></button><button class="soundBtn"></button><button
-                            class="soundBtn"></button><button class="soundBtn"></button><button
-                            class="soundBtn"></button>
+                    <div class="demoBtn">
+                        <button class="soundBtnDemo" value=36 style="margin-bottom: 4px;">kick</button>
+                        <button class="soundBtnDemo" value=38 style="margin-bottom: 3px;">snare</button>
+                        <button class="soundBtnDemo" value=42 style="margin-bottom: 3px;">hihat</button>
+                        <button class="soundBtnDemo" value=46 style="margin-bottom: 3px;">hihat open</button>
+                        <button class="soundBtnDemo" value=50 style="margin-bottom: 2.5px;">tom high</button>
+                        <button class="soundBtnDemo" value=45 style="margin-bottom: 3px;">tom mid</button>
+                        <button class="soundBtnDemo" value=48>tom low</button>
+                    </div>
+                    <div class="timeSeri">
+                        <button class="soundBtn"></button>
+                        <button class="soundBtn"></button>
+                        <button class="soundBtn"></button>
+                        <button class="soundBtn"></button>
+                        <button class="soundBtn"></button>
+                        <button class="soundBtn"></button>
+                        <button class="soundBtn"></button>
                     </div>
                     <div class="timeSeri"><button class="soundBtn"></button><button class="soundBtn"></button><button
                             class="soundBtn"></button><button class="soundBtn"></button><button
@@ -327,17 +362,22 @@
             <!-- </div> -->
 
         </div>
-
+        
+        
 
 
         <%- include('../../partials/scripts') -%>
+
+        <%- include('../../partials/chatBot') -%>
+        
+        <script src="/javascripts/drumDemoBtns.js"></script>
             <script>
 
                 $('#addToDB').click(addToDB);
 
                 function addToDB() {
                     if (!localStorage["loginStatus"]) {
-                        alert('想收藏音樂，請先登入');
+                        alert('Login first to add music to favorite');
                         window.location.href = '/account/login';
                     } else {
                         // console.log(trainedSet);
@@ -353,7 +393,7 @@
                             data: JSON.stringify(data),
                             contentType: "application/json;charset=utf-8"
                         }).done(() => {
-                            alert('已收藏');
+                            alert('Add to favorite');
                         }).fail(() => {
                             console.log('fail');
                         });

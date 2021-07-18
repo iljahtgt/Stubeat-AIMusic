@@ -9,4 +9,7 @@ router.get("/pro", function (req, res, next) {
   res.render("pages/music/pro");
 });
 
+router.get("/remix", function (req, res, next) {
+  res.render("pages/music/remix");
+});
 module.exports = router;

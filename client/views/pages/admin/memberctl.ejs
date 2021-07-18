@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <%- include('../../partials/header') -%>
+        <%- include('../../partials/styles') -%>
+            <style>
+                #updateMem {
+                    width: 30%;
+                    height: 450px;
+                    margin-left: 35%;
+                    margin-top: 2%;
+                    background-color: whitesmoke;
+                    border: 5px solid rgb(46, 78, 111);
+                    border-radius: 5px;
+                    /* padding: 5px; */
+                    text-align: center;
+                }
+            </style>
+
+
+</head>
+
+<body>
+    <!--ajax CRUD參考AjaxClient.html-->
+    <%- include('../../partials/scripts') -%>
+        <%- include('../../partials/adminavbar') -%>
+            <div class="tab-content tabposition">
+                <div id="MemberCtrl">
+                    <div class="rows space-around">
+                        <h2>會員管理</h2>
+                        <div class="searchID">
+                            <input id="searchMem" type="text" placeholder="請輸入查詢會員ID" />
+                            <button class="btn btn-success" id="QueryMem" style="margin-top:0px;"
+                                onclick="QueryMember()">查詢</button>
+                        </div>
+                    </div>
+                    <!-- query table -->
+                    <div id="strtext"></div>
+                    <% if(data.length){ %>
+                        <table class="table overflow-scroll">
+                            <thead>
+                                <tr>
+                                    <th>會員ID</th>
+                                    <th>會員姓名</th>
+                                    <th>Ｅmail</th>
+                                    <th>密碼</th>
+                                    <th>動作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(var i=0; i< data.length; i++) { %>
+                                    <tr>
+                                        <td id="userid<%=data[i].id %>">
+                                            <%= data[i].id %>
+                                        </td>
+                                        <td>
+                                            <input type="button" class="btn"
+                                                style="border: transparent;color:blue;background-color:transparent;"
+                                                id="musiclink" value="<%= data[i].username %>"
+                                                onclick="Memmusic('<%= data[i].id%>')" />
+
+                                        </td>
+                                        <td>
+                                            <%= data[i].email %>
+                                        </td>
+                                        <td>
+                                            <%= data[i].password %>
+                                        </td>
+
+                                        <td>
+                                            <!-- 更改 -->
+                                            <!-- <input type="button" class="btn btn-secondary" data-toggle="modal" data-target="#updateEmp" value="修改" /> -->
+                                            <input type="button" class="btn btn-primary" data-toggle="modal"
+                                                data-target="#updateMem" value="修改" name="edit"
+                                                onclick="MemEdit('<%=data[i].id%>','<%=data[i].username%>')" />
+                                            <input class="btn btn-danger" type="button" value="Delete" name="delete"
+                                                onclick="MemDelete('<%=data[i].id%>');" />
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                            </tbody>
+                        </table>
+                        <% } %>
+                </div>
+            </div>
+            </div>
+            </div>
+
+            <!-- query table finish -->
+
+
+
+            <!-- member CRUD start -->
+            <!-- Create -->
+            <!-- form的action指定傳送的參數是路徑ex:localhost:8707/admin，不是ejs名稱 -->
+            <div class="modal fade" id="addMem" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title">新增會員</h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- form -->
+                            <form action="/admin/memberctl" method="POST" class="modalFormBorder">
+                                <div class="container">
+                                    <div class="form-group">
+                                        <label for="addusername">會員姓名：</label>
+                                        <input id="addusername" name="membername" type="text" class="form-control"
+                                            placeholder="Eve" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="addemail">會員Email：</label>
+                                        <input id="addemail" name="memberemail" type="email" class="form-control"
+                                            placeholder="hahaa@gmail.com" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="addpassword">會員密碼：</label>
+                                        <input id="addpassword" name="memberpassword" type="password"
+                                            class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="addgender">會員性別：</label>
+                                        <input id="addgender" name="membergender" type="text" class="form-control"
+                                            required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="addbirthday">會員生日：</label>
+                                        <input id="addbirthday" name="memberbirthday" type="date" class="form-control"
+                                            placeholder="hahaa@gmail.com" required>
+                                    </div>
+
+                                </div>
+                                <button class="btn btn-primary" type="submit">確認新增</button>
+                                <button type="reset" class="btn btn-success">Reset</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Create Finish -->
+            <!-- Update -->
+            <div class="modal fade" id="updateMem" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true" style="padding-right: 0px;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title">修改會員</h3>
+                        </div>
+                        <div class="modal-body">
+                            <!-- form -->
+                            <!-- <form action="/admin/memberctl/Memedit" method="POST" class="modalFormBorder"> -->
+                            <div class="container">
+                                <div>會員編號：</div>
+                                <input class="form-control" name="id" id="saveMid" readonly />
+                                <div class="form-group">
+                                    <label for="updateMemname">使用者名稱：</label>
+                                    <input id="updateMemname" name="updateMemname" type="text" class="form-control"
+                                        readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="updateMememail">更改使用者Email：</label>
+                                    <input id="updateMememail" name="updateMememail" type="email" class="form-control"
+                                        placeholder="hahaa@gmail.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="updateMempassword">輸入新密碼：</label>
+                                    <input id="updateMempassword" name="updateMempassword" type="password"
+                                        class="form-control" required>
+                                </div>
+
+                            </div>
+                            <div style="text-align: center;">
+                                <button id="memedit" class="btn btn-primary" type="submit">確認修改</button>
+                                <button type="reset" class="btn btn-success">Reset</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                            </div>
+
+                            <!-- </form> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+</body>
+
+
+<script src="/javascripts/frontscript.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $('#memedit').click(function () {
+
+            var catchid = document.getElementById('saveMid');
+            var catchname = document.getElementById('updateMemname');
+            var email = $('#updateMememail').val();
+            var password = $('#updateMempassword').val();
+            var data = {
+                id: $('#saveMid').val(),
+                username: $('#updateMemname').val(),
+                email: email,
+                password: password
+            };
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:1337/api/memedit',
+                data: JSON.stringify(data),
+                contentType: 'application/json;charset=utf-8'
+            }).done(function (result) {
+                alert('update!');
+                location.reload();
+            }).fail(function (err) {
+                alert('email already exist');
+                console.log(err);
+            })
+        })
+
+    });
+
+
+
+</script>
+
+</html>
