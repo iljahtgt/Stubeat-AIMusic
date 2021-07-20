@@ -135,7 +135,7 @@
                         .done(function (result) {
                             localStorage.clear();
                             if (result.length == 0) {
-                                $("#errorMessage").html("帳號錯誤");
+                                $("#errorMessage").html("帳號或密碼錯誤");
                             }
                             console.log(result[0]);
                             localStorage.setItem("loginStatus", true);

@@ -3,7 +3,6 @@ var router = express.Router();
 var con = require("../config/connection.js");
 // var bcrypt = require('bcrypt');
 
-// Tsai's Code
 // login
 router.route("/login").post(function (req, res) {
   var sql = "SELECT * FROM sbmember WHERE email = ? AND password = ?";
@@ -30,7 +29,6 @@ router.route("/signup").post(function (req, res) {
 });
 
 //email
-
 router.route("/emailCheck").post(function (req, res) {
   var sql = "SELECT email FROM sbmember WHERE email = ?";
   var data = [req.body.email];
@@ -42,7 +40,6 @@ router.route("/emailCheck").post(function (req, res) {
   });
 });
 
-//
 
 // save trained data
 router.route("/saveData").post(function (req, res) {
@@ -61,10 +58,12 @@ router.route("/saveData").post(function (req, res) {
 router.route("/readMusic").post(function (req, res) {
   var sql = "SELECT * FROM sbmusic WHERE id = ?";
   var data = [req.body.id];
+  console.log(data);
   con.query(sql, data, (err, result) => {
     if (err) {
       res.send({ message: err });
     }
+    console.log(result);
     res.send(result);
   });
 });
@@ -109,8 +108,8 @@ router.route("/elogin").post(function (req, res) {
     }
   });
 });
-// memberctl
 
+// memberctl
 //memdelete
 router.route("/memdelete").post(function (req, res) {
   var id = req.body.id;
@@ -154,6 +153,7 @@ router.post("/musdelete", function (req, res) {
     }
   });
 });
+
 //musedit
 router.route("/musedit").put(function (req, res) {
   var sql = "update stuBeat.sbmusic set musicname = ? where musicid =?";
@@ -168,6 +168,7 @@ router.route("/musedit").put(function (req, res) {
     }
   });
 });
+
 //empdelete
 router.route("/empdelete").post(function (req, res) {
   var id = req.body.id;
@@ -180,6 +181,7 @@ router.route("/empdelete").post(function (req, res) {
     }
   });
 });
+
 //empedit
 router.route("/empedit").post(function (req, res) {
   var sql = "update stuBeat.sbemployee set ? where id =?";
@@ -195,6 +197,19 @@ router.route("/empedit").post(function (req, res) {
     } else {
       res.send(result);
     }
+  });
+});
+
+//AdminemailCheck
+router.route("/AdminemailCheck").post(function (req, res) {
+  var sql = "SELECT empemail FROM stuBeat.sbemployee WHERE empemail = ?";
+  var data = [req.body.empemail];
+  con.query(sql, data, (err, result) => {
+      if (err) {
+          res.send({ message: err });
+      }
+      console.log(result);
+      res.send(result);
   });
 });
 

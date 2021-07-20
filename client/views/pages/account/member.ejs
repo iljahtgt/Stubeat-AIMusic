@@ -4,11 +4,45 @@
 <head>
 	<%- include('../../partials/header') -%>
 		<%- include('../../partials/styles') -%>
+			<link rel="stylesheet" href="/stylesheets/css/style.css">
+			<link rel="stylesheet" href="/stylesheets/css/keyboard.css">
 			<style>
 				h1 {
 					text-align: center;
 					font-family: 'Lobster', cursive;
 					font-size: 4vw;
+				}
+
+				.memberCard {
+					line-height: 5px;
+				}
+
+				.theadname {
+					color: white;
+				}
+
+				tbody tr:nth-child(2n) {
+					background:#ffefba;
+				  }
+
+				table thead {
+					color: white;
+				}
+
+				table tbody tr:first-child td:first-child {
+					border-radius: 8px 0 0 0;
+				}
+
+				table tbody tr:first-child td:last-child {
+					border-radius: 0 8px 0 0;
+				}
+
+				table tbody tr:last-child td:first-child {
+					border-radius: 0 0 0 8px;
+				}
+
+				table tbody tr:last-child td:last-child {
+					border-radius: 0 0 8px 0;
 				}
 			</style>
 
@@ -19,123 +53,147 @@
 		<%- include('../../partials/scripts') -%>
 
 			<h1>Member Information</h1>
-			<div class="memberCard">
-				<div class="info">
-					<label class="mamberInfoTitle">Member ID#: </label><span id="memberid"
-						class="mamberPageInfo"></span>
-				</div>
-				<div class="info">
-					<label class="mamberInfoTitle">Username: </label><span id="name" class="mamberPageInfo"></span>
-				</div>
-				<div class="info">
-					<label class="mamberInfoTitle">Email: </label><span id="email" class="mamberPageInfo"></span>
-				</div>
-				<!-- <div class="info">
+			<section class="main">
+				<div class="keyboard-shadow">
+					<div class="keyboard-box">
+						<div class="memberCard controls horizontal top" style="width:90%">
+							<div class="vertical">
+								<div class="info">
+									<label class="mamberInfoTitle">Member ID#: </label><span id="memberid"
+										class="mamberPageInfo"></span>
+								</div>
+								<div class="info">
+									<label class="mamberInfoTitle">Username: </label><span id="name"
+										class="mamberPageInfo"></span>
+								</div>
+								<div class="info">
+									<label class="mamberInfoTitle">Email: </label><span id="email"
+										class="mamberPageInfo"></span>
+								</div>
+								<!-- <div class="info">
             <label class="mamberInfoTitle">Phone: </label><span id="phone" class="mamberPageInfo"></span>
           </div> -->
-			</div>
+							</div>
+						</div>
 
-			<div class="musicContainer">
-				<div id="userMusic"></div>
-			</div>
+						<div class="musicContainer" style="width:100%">
+							<div id="userMusic"></div>
+						</div>
 
-
-			</div>
-
+					</div>
+				</div>
+			</section>
 			<%- include('../../partials/chatBot') -%>
 
-			<script>
-				var id = localStorage['userid'];
-				var username = localStorage['username'];
-				var useremail = localStorage['useremail'];
-				var musicList = {};
+				<script>
+					var id = localStorage['userid'];
+					var username = localStorage['username'];
+					var useremail = localStorage['useremail'];
+					var musicList = {};
+					var musicNames = {};
 
-				$('#memberid').html(id);
-				$('#name').html(username);
-				$('#email').html(useremail);
+					$('#memberid').html(id);
+					$('#name').html(username);
+					$('#email').html(useremail);
 
-				$(document).ready(function () {
-					var data = {
-						id: id
-					};
-					$.ajax({
-						type: 'post',
-						url: 'http://localhost:1337/api/readMusic',
-						data: JSON.stringify(data),
-						contentType: 'application/json;charset=utf-8'
-					}).done((result) => {
-						console.log(result);
-						var str = "";
-						str += '<table class="table table-striped table-hover">';
-						str += "<thead>";
-						str += '<tr style="font-weight: bold; font-size: 18px; text-align: left;">';
-						str += "<td>Music List</td>";
-						str += "<td>Play</td>"
-						str += "<td>Delete</td>"
-						// str += "<td>Edit</td>"
-						str += "</tr>";
-						str += "</thead>";
-						str += "<tbody>";
+					$(document).ready(function () {
+						var data = {
+							id: id
+						};
+						$.ajax({
+							type: 'post',
+							url: 'http://localhost:1337/api/readMusic',
+							data: JSON.stringify(data),
+							contentType: 'application/json;charset=utf-8'
+						}).done((result) => {
+							console.log(result);
+							var str = "";
+							str += '<table class="table table-striped table-hover" style="border-radius:10px">';
+							str += "<thead>";
+							str += '<tr class="theadname" style="font-weight: bold; font-size: 18px; text-align: auto;">';
+							str += "<td>Music List</td>";
+							str += "<td>Play</td>"
+							str += "<td>Download</td>"
+							str += "<td>Delete</td>"
+							// str += "<td>Edit</td>"
+							str += "</tr>";
+							str += "</thead>";
+							str += "<tbody>";
 
-						for (let i = 0; i < result.length; i++) {
-							var data = {
-								musicid: parseInt(result[i].musicid),
-								musicname: result[i].musicname
-							};
-							musicList[data.musicid] = JSON.parse(result[i].music);
-							console.log(data);
-							str += "<tr>";
-							str += "<td style='text-align: left; font-size: 16px; vertical-align: middle'>" + data.musicname + "</td>";
-							str += "<td class='userBtn'>" + "<button id='" + data.musicid + "" + "' class='btn btn-default' onClick='playUserMusic(id)'><i class='glyphicon glyphicon-play' ></i> Play</button>" + "</td>";
-							str += "<td class='userBtn'>" + "<button id='" + data.musicid + "" + "' class='btn btn-default' onClick='deleteUserMusic(id)'><i class='fa fa-trash-o' ></i> Delete</button>" + "</td>";
-							// str += "<td class='userBtn'>" + "<button id='" + data.musicid + "" + "' class='btn btn-default' onClick='editUserMusic(id)'><i class='fa fa-pencil-square-o' ></i> Edit</button>" + "</td>";
-							str += "</tr>"
+							for (let i = 0; i < result.length; i++) {
+								var data = {
+									musicid: parseInt(result[i].musicid),
+									musicname: result[i].musicname
+								};
+								musicList[data.musicid] = JSON.parse(result[i].music);
+								musicNames[data.musicid] = data.musicname;
+								console.log(data);
+								str += "<tr>";
+								str += "<td style='text-align: left; font-size: 16px; vertical-align: middle; font-family: 'Lobster', cursive;'>" + data.musicname + "</td>";
+								str += "<td class='userBtn'>" + "<button id='" + data.musicid + "" + "' class='button' onClick='playUserMusic(id)'><i class='glyphicon glyphicon-play' ></i> Play</button>" + "</td>";
+								str += "<td class='userBtn'>" + "<button id='" + data.musicid + "" + "' class='button' onClick='downloadUserMusic(id)' value='" + data.musicname + "'><i class='glyphicon glyphicon-download-alt' ></i> Download</button>" + "</td>";
+								str += "<td class='userBtn'>" + "<button id='" + data.musicid + "" + "' class='button' onClick='deleteUserMusic(id)'><i class='fa fa-trash-o' ></i> Delete</button>" + "</td>";
+								// str += "<td class='userBtn'>" + "<button id='" + data.musicid + "" + "' class='btn btn-default' onClick='editUserMusic(id)'><i class='fa fa-pencil-square-o' ></i> Edit</button>" + "</td>";
+								str += "</tr>"
 
+							}
+
+							console.log(musicList);
+
+
+							$('#userMusic').html(str);
+
+
+						}).fail((err) => {
+							console.log(err)
+						});
+					});
+
+					userPlayer = new mm.SoundFontPlayer('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus');
+					function playUserMusic(id) {
+						// console.log(id);
+						if (userPlayer.isPlaying()) {
+							userPlayer.stop();
+							return;
 						}
 
-						console.log(musicList);
+						var m = musicList[id];
+						console.log(m);
+						userPlayer.start(m);
 
 
-						$('#userMusic').html(str);
+					};
 
+					function downloadUserMusic(id) {
+						console.log('musicNames:', musicNames[id])
+						var m = musicList[id];
 
-					}).fail((err) => {
-						console.log(err)
-					});
-				});
+						saveAs(
+							new File(
+								[mm.sequenceProtoToMidi(m)],
+								musicNames[id] + ".mid"
+							)
+						);
 
-				userPlayer = new mm.SoundFontPlayer('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus');
-				function playUserMusic(id) {
-					// console.log(id);
-					if (userPlayer.isPlaying()) {
-						userPlayer.stop();
-						return;
+					};
+
+					function deleteUserMusic(id) {
+						data = {
+							id: id
+						}
+						$.ajax({
+							type: 'post',
+							url: 'http://localhost:1337/api/deleteMusic',
+							data: JSON.stringify(data),
+							contentType: 'application/json;charset=utf-8'
+						}).done(() => {
+							alert('Deleted!');
+							location.reload();
+						}).fail((err) => {
+							console.log(err)
+						});
 					}
-
-					var m = musicList[id];
-					console.log(m);
-					userPlayer.start(m);
-
-
-				};
-
-				function deleteUserMusic(id) {
-					data = {
-						id: id
-					}
-					$.ajax({
-						type: 'post',
-						url: 'http://localhost:1337/api/deleteMusic',
-						data: JSON.stringify(data),
-						contentType: 'application/json;charset=utf-8'
-					}).done(() => {
-						alert('Deleted!');
-						location.reload();
-					}).fail((err) => {
-						console.log(err)
-					});
-				}
-			</script>
+				</script>
 
 </body>
 
