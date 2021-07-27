@@ -5,126 +5,144 @@
     <%- include('../../partials/header') -%>
         <%- include('../../partials/styles') -%>
 
+            <style>
+                #addEmp {
+                    width: 30%;
+                    height: 450px;
+                    margin-left: 35%;
+                    margin-top: 2%;
+                    background-color: whitesmoke;
+                    border: 5px solid rgb(46, 78, 111);
+                    border-radius: 5px;
+                    /* padding: 5px; */
+                    text-align: center;
+                }
+            </style>
+
 </head>
+
 <body>
     <!--ajax CRUD參考AjaxClient.html-->
     <%- include('../../partials/scripts') -%>
-    <%- include('../../partials/adminavbar.ejs') -%>
-        <div class="tab-content tabposition">
-            <div id="MemberCtrl">
-                <div class="rows space-around">
-                    <h2>員工管理</h2>
-                    <div class="searchID">
-                        <input id="searchEmp" type="text" placeholder="請輸入查詢員工ID" />
-                        <button class="btn btn-success" id="QueryEmp" style="margin-top: 0px;" onclick="QueryEmp()">查詢</button>
+        <%- include('../../partials/adminavbar.ejs') -%>
+            <div class="tab-content tabposition">
+                <div id="MemberCtrl">
+                    <div class="rows space-around">
+                        <h2>員工管理</h2>
+                        <div class="searchID">
+                            <input id="searchEmp" type="text" placeholder="請輸入查詢員工ID" />
+                            <button class="btn btn-success" id="QueryEmp" style="margin-top: 0px;"
+                                onclick="QueryEmp()">查詢</button>
+                            <button type="button" class="btn btn-primary" style="margin-top: 0px;" data-toggle="modal"
+                                data-target="#addEmp">註冊</button>
+                        </div>
                     </div>
-                </div>
-                <!-- query table -->
-                <div id="strtext"></div>
-                <% if(data.length){ %>
-                    <table class="table overflow-scroll">
-                        <thead>
-                            <tr>
-                                <th>員工ID</th>
-                                <th>員工姓名</th>
-                                <th>Email</th>
-                                <th>密碼</th>
-                                <th>動作</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% for(var i=0; i< data.length; i++) { %>
+                    <!-- query table -->
+                    <div id="strtext"></div>
+                    <% if(data.length){ %>
+                        <table class="table overflow-scroll">
+                            <thead>
                                 <tr>
-                                    <td id="userid<%=data[i].id %>">
-                                        <%= data[i].id %>
-                                    </td>
-                                    <td>
-                                        <%= data[i].empname %>
-                                    </td>
-                                    <td>
-                                        <%= data[i].empemail %>
-                                    </td>
-                                    <td>
-                                        <%= data[i].emppassword %>
-                                    </td>
-
-                                    <td>
-                                        <!-- 更改 -->
-                                        <!-- <input type="button" class="btn btn-secondary" data-toggle="modal" data-target="#updateEmp" value="修改" /> -->
-                                        <input type="button" class="btn btn-primary" data-toggle="modal"
-                                            data-target="#updateEmp" value="修改" name="edit"
-                                            onclick="EmpEdit('<%=data[i].id%>','<%=data[i].empname%>')" />
-                                        <input class="btn btn-danger" type="button" value="Delete" name="delete"
-                                            onclick="EmpDelete('<%=data[i].id%>');" />
-                                    </td>
+                                    <th>員工ID</th>
+                                    <th>員工姓名</th>
+                                    <th>Email</th>
+                                    <th>密碼</th>
+                                    <th>動作</th>
                                 </tr>
-                                <% } %>
-                        </tbody>
-                    </table>
-                    <% } %>
+                            </thead>
+                            <tbody>
+                                <% for(var i=0; i< data.length; i++) { %>
+                                    <tr>
+                                        <td id="userid<%=data[i].id %>">
+                                            <%= data[i].id %>
+                                        </td>
+                                        <td>
+                                            <%= data[i].empname %>
+                                        </td>
+                                        <td>
+                                            <%= data[i].empemail %>
+                                        </td>
+                                        <td>
+                                            <%= data[i].emppassword %>
+                                        </td>
+
+                                        <td>
+                                            <!-- 更改 -->
+                                            <!-- <input type="button" class="btn btn-secondary" data-toggle="modal" data-target="#updateEmp" value="修改" /> -->
+                                            <input type="button" class="btn btn-primary" data-toggle="modal"
+                                                data-target="#updateEmp" value="修改" name="edit"
+                                                onclick="EmpEdit('<%=data[i].id%>','<%=data[i].empname%>')" />
+                                            <input class="btn btn-danger" type="button" value="Delete" name="delete"
+                                                onclick="EmpDelete('<%=data[i].id%>');" />
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                            </tbody>
+                        </table>
+                        <% } %>
+                </div>
             </div>
-        </div>
             </div>
-        </div>
+            </div>
 
-        <!-- query table finish -->
+            <!-- query table finish -->
 
 
 
-        <!-- member CRUD start -->
-        <!-- Create -->
-        <!-- form的action指定傳送的參數是路徑ex:localhost:8707/admin，不是ejs名稱 -->
-        <div class="modal fade" id="addMem" data-backdrop="static" data-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title">新增員工</h3>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- form -->
-                        <form action="/admin/empctl" method="POST" class="modalFormBorder">
-                            <div class="container">
-                                <div class="form-group">
-                                    <label for="addempname">員工姓名：</label>
-                                    <input id="addempname" name="empname" type="text" class="form-control"
-                                        placeholder="Eve" required/>
+            <!-- member CRUD start -->
+            <!-- Create -->
+            <!-- form的action指定傳送的參數是路徑ex:localhost:8707/admin，不是ejs名稱 -->
+            <div class="modal fade" id="addMem" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title">新增員工</h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- form -->
+                            <form action="/admin/empctl" method="POST" class="modalFormBorder">
+                                <div class="container">
+                                    <div class="form-group">
+                                        <label for="addempname">員工姓名：</label>
+                                        <input id="addempname" name="empname" type="text" class="form-control"
+                                            placeholder="Eve" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="addemail">員工Email：</label>
+                                        <input id="addemail" name="empemail" type="email" class="form-control"
+                                            placeholder="hahaa@gmail.com" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="addpassword">員工密碼：</label>
+                                        <input id="addpassword" name="emppassword" type="password" class="form-control"
+                                            required>
+                                    </div>
+
                                 </div>
-                                <div class="form-group">
-                                    <label for="addemail">員工Email：</label>
-                                    <input id="addemail" name="empemail" type="email" class="form-control"
-                                        placeholder="hahaa@gmail.com" required/>
-                                </div>
-                                <div class="form-group">
-                                    <label for="addpassword">員工密碼：</label>
-                                    <input id="addpassword" name="emppassword" type="password" class="form-control"
-                                        required>
-                                </div>
-                                
-                            </div>
-                            <button class="btn btn-primary" type="submit">確認新增</button>
-                            <button type="reset" class="btn btn-success">Reset</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-                        </form>
+                                <button class="btn btn-primary" type="submit">確認新增</button>
+                                <button type="reset" class="btn btn-success">Reset</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Create Finish -->
-        <!-- Update -->
-        <div class="modal fade" id="updateEmp" data-backdrop="static" data-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title">修改員工</h3>
-                    </div>
-                    <div class="modal-body">
-                        <!-- form -->
-                        <!-- <form action="/admin/empctl/EmpEdit" method="POST" class="modalFormBorder"> -->
+            <!-- Create Finish -->
+            <!-- Update -->
+            <div class="modal fade" id="updateEmp" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title">修改員工</h3>
+                        </div>
+                        <div class="modal-body">
+                            <!-- form -->
+                            <!-- <form action="/admin/empctl/EmpEdit" method="POST" class="modalFormBorder"> -->
                             <div class="containerA">
                                 <div>員工編號：</div>
                                 <input class="form-control" name="id" id="saveMid" readonly />
@@ -143,55 +161,208 @@
                                     <input id="updateEmppassword" name="updateEmppassword" type="password"
                                         class="form-control" required>
                                 </div>
-                                
+
                             </div>
                             <div style="text-align: center;">
                                 <button id="EmpEdit" class="btn btn-primary" type="submit">確認修改</button>
-                            <button type="reset" class="btn btn-success">Reset</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                                <button type="reset" class="btn btn-success">Reset</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
                             </div>
-                            
-                        <!-- </form> -->
+
+                            <!-- </form> -->
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <!-- addEmp -->
+            <div class="modal fade" id="addEmp" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title">新增管理者</h3>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="form-group">
+                                    <label for="addAdminname">管理者名稱：</label>
+                                    <input id="addAdminname" name="username" type="text" class="form-control" required>
+                                    <span class="errorMes" id="nameMessage"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="addAdminemail">使用者信箱：</label>
+                                    <input id="addAdminemail" name="email" type="email" class="form-control" required>
+                                    <span class="errorMes" id="emailMessage"></span>
+                                </div>
+                                <div class="messSpan alert-danger" id="alertMessage" style="margin-top: 10px;"></div>
+                                <div class="form-group">
+                                    <label for="addAdminpwd">使用者密碼：</label>
+                                    <input id="addAdminpwd" name="password" type="password" size="6"
+                                        class="form-control" required>
+                                    <span class="errorMes" id="idsp"></span>
+                                    <div class="tip">(1.英數混合 2.6位數以上)</div>
+                                    <button class="btn btn-primary" id="esignupBtn" type="submit">新增</button>
+                                    <button type="reset" class="btn btn-success">Reset</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 </body>
 
 <script src="/javascripts/frontscript.js"></script>
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
 
-        $('#EmpEdit').click(function(){
-            
-            var catchid=document.getElementById('saveMid');
-            var catchname=document.getElementById('updateEmpname');
-            var email=$('#updateEmpemail').val();
-            var password=$('#updateEmppassword').val();
-            var data={
-                id:$('#saveMid').val(),
-                empname:$('#updateEmpname').val(),
-                empemail:email,
-                emppassword:password
+        $('#EmpEdit').click(function () {
+
+            var catchid = document.getElementById('saveMid');
+            var catchname = document.getElementById('updateEmpname');
+            var email = $('#updateEmpemail').val();
+            var password = $('#updateEmppassword').val();
+            var data = {
+                id: $('#saveMid').val(),
+                empname: $('#updateEmpname').val(),
+                empemail: email,
+                emppassword: password
             };
             $.ajax({
-                type:'POST',
-                url:'http://localhost:1337/api/EmpEdit',
-                data:JSON.stringify(data),
-                contentType:'application/json;charset=utf-8'
-            }).done(function(result){
+                type: 'POST',
+                url: 'http://localhost:1337/api/EmpEdit',
+                data: JSON.stringify(data),
+                contentType: 'application/json;charset=utf-8'
+            }).done(function (result) {
                 alert('update!');
                 location.reload();
-            }).fail(function(err){
+            }).fail(function (err) {
                 alert('email already exist');
                 console.log(err);
             })
         })
 
     });
-    
 
-    
+    // sign up
+    $('#esignupBtn').click(function () {
+                var empname = $('#addAdminname').val();
+                var empemail = $('#addAdminemail').val();
+                var emppassword = $('#addAdminpwd').val();
+                if (empname && empemail && emppassword && emailFlag) {
+                    var newAdmin = {
+                        empname: empname,
+                        empemail: empemail,
+                        emppassword: emppassword
+                    };
+                    $.ajax({
+                        type: 'post',
+                        url: 'http://localhost:1337/api/esignup',
+                        data: JSON.stringify(newAdmin),
+                        contentType: 'application/json;charset=utf-8'
+                    }).done(function (result) {
+                        // console.log(result);
+                        if (!result.length == 0) {
+                            $("#alertMessage").html("帳號存在");
+                        }
+                        alert('Emp Signup');
+                        window.location.href = '/admin/';
+                    }
+                    ).fail(function (err) {
+                        alert('Error: ' + err.errorText);
+                    })
+                } else {
+                    alert("欄位有問題");
+                };
+            })
+
+
+            // check password format
+            document.getElementById("addAdminpwd").onblur = checkPwd;
+            function checkPwd() {
+                //取得addAdminpwd元素
+                let thePwdObj = document.getElementById("addAdminpwd");//拿到欄位ＩＤ
+                console.log(typeof thePwdObj);
+                //取得addAdminpwd元素值
+                let thePwdObjVal = thePwdObj.value;//拿到欄位值
+                console.log(typeof thePwdObjVal);
+                console.log(thePwdObjVal);
+                //判斷元素值是否為空白，密碼長度是否大於6
+                //如果長度是否大於6，判斷是否包含字母、數字、特殊符號
+                let sp = document.getElementById("idsp");
+                let thePwdObjValLen = thePwdObjVal.length;//拿到輸入內容長度
+                let flag1 = false, flag2 = false, flag3 = false;
+                if (thePwdObjVal == "")
+                    sp.innerHTML = "不可空白";
+
+                // sp.innerHTML = "you need enter";
+                else if (thePwdObjValLen >= 6) {
+
+                    sp.innerHTML = ">=";
+                    for (let i = 0; i < thePwdObjValLen; i++) {
+                        let ch = thePwdObjVal.charAt(i).toUpperCase();
+                        if (ch >= "A" && ch <= "Z")
+                            flag1 = true;
+                        //else if()
+                        if (flag1) break;
+                    }
+                    for (let o = 0; o < thePwdObjValLen; o++) {
+                        let num = thePwdObjVal.charAt(o);
+                        if (num >= 0 && num <= 9)
+                            flag2 = true;
+                        if (flag2) break;
+                    }
+                    if (flag1 && flag2)
+                        sp.innerHTML = "👍";
+                    else if (flag1)
+                        sp.innerHTML = "❌ 缺少數字";
+                    else if (flag2)
+                        sp.innerHTML = "❌ 缺少英文";
+                } else {
+                    sp.innerHTML = "❌ 需要6個以上的字元";
+                }
+            }
+
+            // chack if email already exists
+            $('#addAdminemail').blur(function () {
+                var emailCheck = $('#addAdminemail').val();
+                if (emailCheck === '') {
+                    $('#emailMessage').html('不可空白');
+                    emailFlag = false;
+                } else {
+                    var data = { email: emailCheck }
+                    $.ajax({
+                        type: 'post',
+                        url: 'http://localhost:1337/api/AdminemailCheck',
+                        data: JSON.stringify(data),
+                        contentType: 'application/json;charset=utf-8'
+                    }).done(function (result) {
+                        console.log(result);
+                        if (!result.length == 0) {
+                            $('#emailMessage').html('會員已存在');
+                            emailFlag = false;
+                        } else {
+                            $('#emailMessage').html('👍')
+                            emailFlag = true;
+                        }
+                    }).fail(function (err) {
+                        alert(JSON.stringify(err));
+                    });
+                }
+            })
+
+            // check usename
+            $('#addAdminname').blur(function () {
+                if ($('#addAdminname').val() === '') {
+                    $('#nameMessage').html('不可空白');
+                } else {
+                    $('#nameMessage').html('👍')
+                }
+            })
+
+
+
 </script>
+
 </html>

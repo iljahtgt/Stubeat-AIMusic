@@ -5,65 +5,97 @@
 
     <%- include('../../partials/header') -%>
         <%- include('../../partials/styles') -%>
-            <style>
-                h1 {
-                    text-align: center;
-                    font-family: 'Lobster', cursive;
-                    font-size: 4vw;
-                }
-                
-                h3 {
-                    text-align: center;
-                    font-family: 'Lobster', cursive;
-                    font-size: 2vw;
-                    margin-top: 100px;
-                    margin-bottom: 100px;
-                }
-
-                html {
-                    box-sizing: border-box;
-                }
-
-                *,
-                *:before,
-                *:after {
-                    box-sizing: inherit;
-                }
-
-                .column {
-                    float: left;
-                    width: 16%;
-                    margin-left: 10px;
-                    margin-bottom: 16px;
-                    padding: 0 8px;
-                }
-
-                @media screen and (max-width: 650px) {
-                    .column {
-                        width: 100%;
-                        display: block;
+            <%- include('../../partials/scripts') -%>
+                <style>
+                    h1 {
+                        text-align: center;
+                        font-family: 'Lobster', cursive;
+                        font-size: 4vw;
                     }
-                }
 
-                .card {
-                    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-                }
+                    .text>h2 {
+                        width: 200px;
+                        font-size: 40px;
+                        background-color: #5b350c;
+                        color: white;
+                        border-radius: 10px;
+                        padding: 10px;
+                        text-shadow: 3px 3px 3px #3d3734;
+                    }
 
-                .container {
-                    padding: 0 16px;
-                }
+                    h3 {
+                        text-align: center;
+                        font-family: 'Lobster', cursive;
+                        font-size: 2vw;
+                        margin-top: 100px;
+                        margin-bottom: 100px;
+                    }
 
-                .container::after,
-                .row::after {
-                    content: "";
-                    clear: both;
-                    display: table;
-                }
 
-                .title {
-                    color: grey;
-                }
-            </style>
+                    h5 {
+                        font-size: 30px;
+                        margin-top: 30px;
+                        /*margin-bottom: 100px;*/
+                    }
+
+                    html {
+                        box-sizing: border-box;
+                    }
+
+                    *,
+                    *:before,
+                    *:after {
+                        box-sizing: inherit;
+                    }
+
+                    .column {
+                        float: left;
+                        width: 16%;
+                        margin-left: 10px;
+                        margin-bottom: 16px;
+                        padding: 0 8px;
+                    }
+
+                    @media screen and (max-width: 650px) {
+                        .column {
+                            width: 100%;
+                            display: block;
+                        }
+                    }
+
+                    .card {
+                        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                    }
+
+                    .container {
+                        padding: 0 16px;
+                    }
+
+                    .container::after,
+                    .row::after {
+                        content: "";
+                        clear: both;
+                        display: table;
+                    }
+
+                    .title {
+                        color: grey;
+                    }
+
+                    li {
+                        font-family: 'Lobster', cursive;
+                        font-size: 50px;
+                    }
+
+                    .text {
+                        width: 60%;
+                        margin: 40px auto;
+                        padding: 50px;
+                        background-color: rgb(243, 206, 137);
+                        border-radius: 10px;
+                        font-size: 20px;
+                    }
+                </style>
 </head>
 
 <body>
@@ -73,88 +105,135 @@
         <div class="aboutContent">
             <p>StuBeat is a platform that generates music with Google's Magenta model.</p>
         </div>
+        <ul class="nav nav-tabs " style="display: table;margin: 0 auto;">
+            <li role="presentation"><a href="#OurProject" data-toggle="tab" class="btn btn-warning btn-lg">Our
+                    Project</a></li>
+            <li role="presentation"><a href="#Presentation" data-toggle="tab"
+                    class="btn btn-warning btn-lg">Presentation</a></li>
+            <li role="presentation"><a href="#OurTeam" data-toggle="tab" class="btn btn-warning btn-lg">Our
+                    Team</a></li>
+        </ul>
+        <div class="tab-content" style="padding:10px">
+            <div id="OurProject" class="tab-pane fade" style="margin:60px">
+                <!-- 頁籤:我們的專案 -->
+                <div class="container text">
+                    <!-- <h3>主題介紹</h3> -->
+                    <h5>音樂即生活!</h5>
+                    <p>疫情期間關在家裡覺得心情鬱卒?<br>
+                        何不試試靠著玩音樂抒發情緒呢?<br>
+                        我們的生活到處充滿著音樂；咖啡廳中的抒情樂、廣告中洗腦旋律、甚至垃圾車都有自己的主題曲…，音樂能改變環境氛圍，甚至能左右我們的情緒!<br>
+                        然而，音樂在大部分人面前猶如彩虹，絢麗卻無法觸及。市面上有非常多的音樂軟體，都在優化使用者”聽”音樂的體驗，卻很少軟體能讓使用者自己”做”音樂。<br>
+                        想像一下，如果能將您散步時隨意哼的小曲、洗澡時對著蓮蓬頭的深情對唱、無聊時手指輕敲桌椅的節拍全部變成一段音樂，開始輕鬆玩音樂，藉此拉近您與音樂的距離，那該是多麼棒的一件事!</p>
+                    <h5>想玩音樂嗎?</h5>
+                    <p>不用擔心不懂音樂，”StuBeat”讓您只要打幾個節拍、彈幾個音，剩下的AI幫您搞定，藉由您輸入的節拍、旋律，快速生成更複雜的音樂或是後續的音樂，讓您不懂音樂也能玩音樂。同時”StuBeat”可以紀錄您之前創作的所有音樂，讓您擁有自己的作品集，快來”StuBeat”編織屬於自己的樂章!
+                    </p>
 
-        <h3>Meet Our Team!</h3>
+                </div>
+                <div class="container text">
+                    <h2>實作歷程</h2>
+                    <h5>處理音檔</h5>
+                    <p>我們把虛擬樂器敲出的旋律，依敲奏順序，鋼琴的部分，是以音的高低作pitch記錄，並記錄每一個琴鍵按下的開始時間與結束時間；敲擊樂器的部分，則將不同種敲擊樂器作pitch記錄，設定節拍速度qpm，並記錄每一個鼓鍵是在第幾拍時敲擊，以上資訊轉為JSON序列格式，在Magenta模型裡稱為NoteSequence，類似MIDI檔格式。
+                    </p>
+                    <h5>研究模型</h5>
+                    <p>我們主要是利用Magenta中的Music RNN。此模型是用RNN中的LSTM(Long short-term
+                        memory)模型。不同於其他深度學習的模型，RNN會將上一筆資料一起列入計算，因此能夠解決音樂較長的時間序列的問題。</p>
+                    <h5>網頁呈現</h5>
+                    <p>我們參考了國內外音樂製作網站及音樂製作軟體，並利用Node.js製作網頁前後端。我們採取前後端分離的架構撰寫網頁，以ejs動態生成前端網頁、Express框架撰寫後端API並搭配MySQL資料庫提供完整的RESTful服務，再搭配Azure
+                        Bot Service的客服機器人，讓網頁更加完整。</p>
+                </div>
+            </div>
+            <div id="Presentation" class="tab-pane fade">
+                <!-- 頁籤:專案演示 -->
+                <div class="container" style="width:60%; margin:0 auto; margin-top:50px">
+                    <iframe src="https://drive.google.com/file/d/1XrWZ_Bl7df4GjsGKbiuHsucVjL7Xxx26/preview" width="100%"
+                        height="480" allow="autoplay"></iframe>
+                </div>
+            </div>
+            <div id="OurTeam" class="tab-pane fade">
+                <!-- 頁籤:我們的團隊 -->
+                <div class="container" style="width:100%; margin:0 auto">
+                    <h3>Meet Our Team!</h3>
+                    <div class=" row">
+                        <div class="column">
+                            <div class="card">
+                                <img src="/images/chris.JPG" alt="Chris" style="width:100%; height: 66%">
+                                <div class="container">
+                                    <h2>Chris Chen</h2>
+                                    <p class="title">Team Leader</p>
+                                    <p>Project integrate | Backend</p>
+                                    <p>cjr96720@terpmail.umd.edu</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="column">
+                            <div class="card">
+                                <img src="/images/jason.png" alt="Jason" style="width:100%; height: 66%">
+                                <div class="container">
+                                    <h2>吳柏承</h2>
+                                    <p class="title">Team Member</p>
+                                    <p>Frontend | Model</p>
+                                    <p>j22233345555@gmail.com</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="column">
+                            <div class="card">
+                                <img src="/images/tsai.png" alt="Tasi" style="width:100%; height: 66%">
+                                <div class="container">
+                                    <h2>蔡奕德</h2>
+                                    <p class="title">Team Member</p>
+                                    <p>Login system | MySQL</p>
+                                    <p>iljahtgt@gmail.com</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="column">
+                            <div class="card">
+                                <img src="/images/yian.png" alt="Yian" style="width:100%; height: 66%">
+                                <div class="container">
+                                    <h2>陳奕安</h2>
+                                    <p class="title">Team Member</p>
+                                    <p>Backend | Frontend</p>
+                                    <p>aether87712@gmail.com</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="column">
+                            <div class="card">
+                                <img src="/images/beatriz.png" alt="Beatriz" style="width:100%; height: 66%">
+                                <div class="container">
+                                    <h2>林宛儀</h2>
+                                    <p class="title">Team Member</p>
+                                    <p>Frontend | Model</p>
+                                    <p>wanylinbeatriz@gmail.com</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="column">
+                            <div class="card">
+                                <img src="/images/mika.png" alt="Liu" style="width:100%; height: 66%">
+                                <div class="container">
+                                    <h2>劉致華</h2>
+                                    <p class="title">Team Member</p>
+                                    <p>Azure</p>
+                                    <p>mikaliu5810@gmail.com</p>
+                                </div>
+                            </div>
+                        </div>
 
 
-        <div class="row">
-            <div class="column">
-                <div class="card">
-                    <img src="/images/chris.JPG" alt="Chris" style="width:100%; height: 66%">
-                    <div class="container">
-                        <h2>Chris Chen</h2>
-                        <p class="title">Team Leader</p>
-                        <p>Project integrate | Backend</p>
-                        <p>cjr96720@terpmail.umd.edu</p>
+
                     </div>
                 </div>
             </div>
 
-            <div class="column">
-                <div class="card">
-                    <img src="/images/jason.png" alt="Jason" style="width:100%; height: 66%">
-                    <div class="container">
-                        <h2>吳柏承</h2>
-                        <p class="title">Team Member</p>
-                        <p>Frontend | Model</p>
-                        <p>j22233345555@gmail.com</p>
-                    </div>
-                </div>
-            </div>
 
-            <div class="column">
-                <div class="card">
-                    <img src="/images/tsai.png" alt="Tasi" style="width:100%; height: 66%">
-                    <div class="container">
-                        <h2>蔡奕德</h2>
-                        <p class="title">Team Member</p>
-                        <p>Login system | MySQL</p>
-                        <p>iljahtgt@gmail.com</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="column">
-                <div class="card">
-                    <img src="/images/yian.png" alt="Yian" style="width:100%; height: 66%">
-                    <div class="container">
-                        <h2>陳奕安</h2>
-                        <p class="title">Team Member</p>
-                        <p>Backend | Frontend</p>
-                        <p>aether87712@gmail.com</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="column">
-                <div class="card">
-                    <img src="/images/beatriz.png" alt="Beatriz" style="width:100%; height: 66%">
-                    <div class="container">
-                        <h2>林宛儀</h2>
-                        <p class="title">Team Member</p>
-                        <p>Frontend | Model</p>
-                        <p>wanylinbeatriz@gmail.com</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="column">
-                <div class="card">
-                    <img src="/images/mika.png" alt="Liu" style="width:100%; height: 66%">
-                    <div class="container">
-                        <h2>劉致華</h2>
-                        <p class="title">Team Member</p>
-                        <p>Azure</p>
-                        <p>mikaliu5810@gmail.com</p>
-                    </div>
-                </div>
-            </div>
-
-
-
-        </div>
-
-        <%- include('../../partials/chatBot') -%>
+            <%- include('../../partials/chatBot') -%>
 
 </body>
 

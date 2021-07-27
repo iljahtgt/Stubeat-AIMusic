@@ -70,7 +70,7 @@
             <div class="form-group">
                 <div class="btns">
                     <button class="btn btn-primary" id="eloginBtn">登入</button>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addEmp">註冊</button>
+                    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addEmp">註冊</button> -->
                     <div class="messSpan alert-danger" id="errorMessage" style="margin-top: 10px;"></div>
                 </div>
             </div>
@@ -152,121 +152,121 @@
                 }
             });
 
-            // sign up
-            $('#esignupBtn').click(function () {
-                var empname = $('#addAdminname').val();
-                var empemail = $('#addAdminemail').val();
-                var emppassword = $('#addAdminpwd').val();
-                if (empname && empemail && emppassword && emailFlag) {
-                    var newAdmin = {
-                        empname: empname,
-                        empemail: empemail,
-                        emppassword: emppassword
-                    };
-                    $.ajax({
-                        type: 'post',
-                        url: 'http://localhost:1337/api/esignup',
-                        data: JSON.stringify(newAdmin),
-                        contentType: 'application/json;charset=utf-8'
-                    }).done(function (result) {
-                        // console.log(result);
-                        if (!result.length == 0) {
-                            $("#alertMessage").html("帳號存在");
-                        }
-                        alert('Emp Signup');
-                        window.location.href = '/admin/';
-                    }
-                    ).fail(function (err) {
-                        alert('Error: ' + err.errorText);
-                    })
-                } else {
-                    alert("欄位有問題");
-                };
-            })
+            // // sign up
+            // $('#esignupBtn').click(function () {
+            //     var empname = $('#addAdminname').val();
+            //     var empemail = $('#addAdminemail').val();
+            //     var emppassword = $('#addAdminpwd').val();
+            //     if (empname && empemail && emppassword && emailFlag) {
+            //         var newAdmin = {
+            //             empname: empname,
+            //             empemail: empemail,
+            //             emppassword: emppassword
+            //         };
+            //         $.ajax({
+            //             type: 'post',
+            //             url: 'http://localhost:1337/api/esignup',
+            //             data: JSON.stringify(newAdmin),
+            //             contentType: 'application/json;charset=utf-8'
+            //         }).done(function (result) {
+            //             // console.log(result);
+            //             if (!result.length == 0) {
+            //                 $("#alertMessage").html("帳號存在");
+            //             }
+            //             alert('Emp Signup');
+            //             window.location.href = '/admin/';
+            //         }
+            //         ).fail(function (err) {
+            //             alert('Error: ' + err.errorText);
+            //         })
+            //     } else {
+            //         alert("欄位有問題");
+            //     };
+            // })
 
 
-            // check password format
-            document.getElementById("addAdminpwd").onblur = checkPwd;
-            function checkPwd() {
-                //取得addAdminpwd元素
-                let thePwdObj = document.getElementById("addAdminpwd");//拿到欄位ＩＤ
-                console.log(typeof thePwdObj);
-                //取得addAdminpwd元素值
-                let thePwdObjVal = thePwdObj.value;//拿到欄位值
-                console.log(typeof thePwdObjVal);
-                console.log(thePwdObjVal);
-                //判斷元素值是否為空白，密碼長度是否大於6
-                //如果長度是否大於6，判斷是否包含字母、數字、特殊符號
-                let sp = document.getElementById("idsp");
-                let thePwdObjValLen = thePwdObjVal.length;//拿到輸入內容長度
-                let flag1 = false, flag2 = false, flag3 = false;
-                if (thePwdObjVal == "")
-                    sp.innerHTML = "不可空白";
+            // // check password format
+            // document.getElementById("addAdminpwd").onblur = checkPwd;
+            // function checkPwd() {
+            //     //取得addAdminpwd元素
+            //     let thePwdObj = document.getElementById("addAdminpwd");//拿到欄位ＩＤ
+            //     console.log(typeof thePwdObj);
+            //     //取得addAdminpwd元素值
+            //     let thePwdObjVal = thePwdObj.value;//拿到欄位值
+            //     console.log(typeof thePwdObjVal);
+            //     console.log(thePwdObjVal);
+            //     //判斷元素值是否為空白，密碼長度是否大於6
+            //     //如果長度是否大於6，判斷是否包含字母、數字、特殊符號
+            //     let sp = document.getElementById("idsp");
+            //     let thePwdObjValLen = thePwdObjVal.length;//拿到輸入內容長度
+            //     let flag1 = false, flag2 = false, flag3 = false;
+            //     if (thePwdObjVal == "")
+            //         sp.innerHTML = "不可空白";
 
-                // sp.innerHTML = "you need enter";
-                else if (thePwdObjValLen >= 6) {
+            //     // sp.innerHTML = "you need enter";
+            //     else if (thePwdObjValLen >= 6) {
 
-                    sp.innerHTML = ">=";
-                    for (let i = 0; i < thePwdObjValLen; i++) {
-                        let ch = thePwdObjVal.charAt(i).toUpperCase();
-                        if (ch >= "A" && ch <= "Z")
-                            flag1 = true;
-                        //else if()
-                        if (flag1) break;
-                    }
-                    for (let o = 0; o < thePwdObjValLen; o++) {
-                        let num = thePwdObjVal.charAt(o);
-                        if (num >= 0 && num <= 9)
-                            flag2 = true;
-                        if (flag2) break;
-                    }
-                    if (flag1 && flag2)
-                        sp.innerHTML = "👍";
-                    else if (flag1)
-                        sp.innerHTML = "❌ 缺少數字";
-                    else if (flag2)
-                        sp.innerHTML = "❌ 缺少英文";
-                } else {
-                    sp.innerHTML = "❌ 需要6個以上的字元";
-                }
-            }
+            //         sp.innerHTML = ">=";
+            //         for (let i = 0; i < thePwdObjValLen; i++) {
+            //             let ch = thePwdObjVal.charAt(i).toUpperCase();
+            //             if (ch >= "A" && ch <= "Z")
+            //                 flag1 = true;
+            //             //else if()
+            //             if (flag1) break;
+            //         }
+            //         for (let o = 0; o < thePwdObjValLen; o++) {
+            //             let num = thePwdObjVal.charAt(o);
+            //             if (num >= 0 && num <= 9)
+            //                 flag2 = true;
+            //             if (flag2) break;
+            //         }
+            //         if (flag1 && flag2)
+            //             sp.innerHTML = "👍";
+            //         else if (flag1)
+            //             sp.innerHTML = "❌ 缺少數字";
+            //         else if (flag2)
+            //             sp.innerHTML = "❌ 缺少英文";
+            //     } else {
+            //         sp.innerHTML = "❌ 需要6個以上的字元";
+            //     }
+            // }
 
-            // chack if email already exists
-            $('#addAdminemail').blur(function () {
-                var emailCheck = $('#addAdminemail').val();
-                if (emailCheck === '') {
-                    $('#emailMessage').html('不可空白');
-                    emailFlag = false;
-                } else {
-                    var data = { email: emailCheck }
-                    $.ajax({
-                        type: 'post',
-                        url: 'http://localhost:1337/api/AdminemailCheck',
-                        data: JSON.stringify(data),
-                        contentType: 'application/json;charset=utf-8'
-                    }).done(function (result) {
-                        console.log(result);
-                        if (!result.length == 0) {
-                            $('#emailMessage').html('會員已存在');
-                            emailFlag = false;
-                        } else {
-                            $('#emailMessage').html('👍')
-                            emailFlag = true;
-                        }
-                    }).fail(function (err) {
-                        alert(JSON.stringify(err));
-                    });
-                }
-            })
+            // // chack if email already exists
+            // $('#addAdminemail').blur(function () {
+            //     var emailCheck = $('#addAdminemail').val();
+            //     if (emailCheck === '') {
+            //         $('#emailMessage').html('不可空白');
+            //         emailFlag = false;
+            //     } else {
+            //         var data = { email: emailCheck }
+            //         $.ajax({
+            //             type: 'post',
+            //             url: 'http://localhost:1337/api/AdminemailCheck',
+            //             data: JSON.stringify(data),
+            //             contentType: 'application/json;charset=utf-8'
+            //         }).done(function (result) {
+            //             console.log(result);
+            //             if (!result.length == 0) {
+            //                 $('#emailMessage').html('會員已存在');
+            //                 emailFlag = false;
+            //             } else {
+            //                 $('#emailMessage').html('👍')
+            //                 emailFlag = true;
+            //             }
+            //         }).fail(function (err) {
+            //             alert(JSON.stringify(err));
+            //         });
+            //     }
+            // })
 
-            // check usename
-            $('#addAdminname').blur(function () {
-                if ($('#addAdminname').val() === '') {
-                    $('#nameMessage').html('不可空白');
-                } else {
-                    $('#nameMessage').html('👍')
-                }
-            })
+            // // check usename
+            // $('#addAdminname').blur(function () {
+            //     if ($('#addAdminname').val() === '') {
+            //         $('#nameMessage').html('不可空白');
+            //     } else {
+            //         $('#nameMessage').html('👍')
+            //     }
+            // })
 
 
         </script>
